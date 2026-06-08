@@ -77,8 +77,10 @@ export default function RootLayout({
     >
       <head>
         <script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          suppressHydrationWarning
         />
       </head>
       <body className="min-h-screen flex flex-col">{children}</body>

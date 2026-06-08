@@ -171,7 +171,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">
+          <p className="text-xs text-white/40" suppressHydrationWarning>
             {siteContent.brand.copyright}
           </p>
           <p className="text-xs text-white/40">
