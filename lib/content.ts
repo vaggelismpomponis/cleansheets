@@ -13,7 +13,6 @@ export const siteContent = {
   nav: {
     links: [
       { label: "Πώς Λειτουργεί", href: "#how-it-works" },
-      { label: "Τιμοκατάλογος", href: "#pricing" },
       { label: "Συχνές Ερωτήσεις", href: "#faq" },
       { label: "Επικοινωνία", href: "#contact" },
     ],
@@ -182,7 +181,6 @@ export const siteContent = {
         title: "Υπηρεσία",
         links: [
           { label: "Πώς Λειτουργεί", href: "#how-it-works" },
-          { label: "Τιμοκατάλογος", href: "#pricing" },
           { label: "Συχνές Ερωτήσεις", href: "#faq" },
         ],
       },
