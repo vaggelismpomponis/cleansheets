@@ -7,7 +7,7 @@ export const siteContent = {
   brand: {
     name: "CleanSheets",
     tagline: "Καθαρισμός & Ασφάλεια για Airbnb Ιδιοκτήτες",
-    copyright: "© 2025 CleanSheets. All rights reserved.",
+    copyright: `© ${new Date().getFullYear()} CleanSheets. All rights reserved.`,
   },
 
   nav: {
