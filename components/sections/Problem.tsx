@@ -1,9 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, UserX, ShieldAlert, Clock } from "lucide-react";
 import { siteContent } from "@/lib/content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+
+const iconMap = {
+  UserX,
+  ShieldAlert,
+  Clock,
+};
 
 export default function Problem() {
   const handleScroll = (href: string) => {
@@ -47,29 +53,34 @@ export default function Problem() {
           variants={staggerContainer}
           className="grid md:grid-cols-3 gap-6 lg:gap-8"
         >
-          {siteContent.problem.cards.map((card, i) => (
-            <motion.div
-              key={i}
-              variants={fadeInUp}
-              className="card-hover group bg-white rounded-2xl p-8 border border-card-border relative overflow-hidden"
-            >
-              {/* Hover gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {siteContent.problem.cards.map((card, i) => {
+            const IconComponent = iconMap[card.icon as keyof typeof iconMap];
+            return (
+              <motion.div
+                key={i}
+                variants={fadeInUp}
+                className="card-hover group bg-white rounded-2xl p-8 border border-card-border relative overflow-hidden"
+              >
+                {/* Hover gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative">
-                <div className="text-5xl mb-5">{card.emoji}</div>
-                <h3 className="text-xl font-bold text-navy mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-muted leading-relaxed">
-                  {card.description}
-                </p>
-              </div>
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-6 text-teal group-hover:bg-teal group-hover:text-white transition-all duration-300">
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-navy mb-3">
+                    {card.title}
+                  </h3>
+                  <p className="text-muted leading-relaxed">
+                    {card.description}
+                  </p>
+                </div>
 
-              {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-teal to-teal-light transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-            </motion.div>
-          ))}
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-teal to-teal-light transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Transition CTA */}
