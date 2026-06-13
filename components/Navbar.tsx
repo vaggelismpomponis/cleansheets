@@ -2,12 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { siteContent } from "@/lib/content";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,10 +43,18 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobileMenuOpen]);
 
+  const isHashLink = (href: string) => href.startsWith("#");
+
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: "smooth" });
+    if (isHashLink(href)) {
+      if (pathname === "/") {
+        const element = document.querySelector(href);
+        element?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = `/${href}`;
+      }
+    }
   };
 
   return (
@@ -51,48 +62,76 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled || isMobileMenuOpen
-            ? "bg-white border-b border-border shadow-sm"
+            ? "bg-white/90 backdrop-blur-xl border-b border-border-light shadow-xs"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-16 md:h-[72px]">
             {/* Logo */}
-            <a
-              href="#"
-              className="flex items-center gap-2 group"
-              onClick={(e) => {
-                e.preventDefault();
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 group"
+              onClick={() => {
                 setIsMobileMenuOpen(false);
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                if (pathname === "/") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
               }}
             >
-              <div className="w-9 h-9 rounded-lg bg-teal flex items-center justify-center group-hover:bg-teal-light transition-colors">
-                <Sparkles className="w-5 h-5 text-white" />
+              <div className="relative">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 6h18"/>
+                    <path d="M3 12h18"/>
+                    <path d="M3 18h18"/>
+                    <path d="M20 6l-2 12H6L4 6"/>
+                  </svg>
+                </div>
               </div>
-              <span className="text-xl font-bold font-heading text-navy">
+              <span className={`text-lg font-bold font-heading tracking-tight transition-colors ${
+                isScrolled || isMobileMenuOpen ? "text-navy" : "text-white"
+              }`}>
                 {siteContent.brand.name}
               </span>
-            </a>
+            </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8">
-              {siteContent.nav.links.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="text-sm font-medium text-muted hover:text-navy transition-colors relative group cursor-pointer"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal transition-all duration-300 group-hover:w-full" />
-                </button>
-              ))}
+            <div className="hidden md:flex items-center gap-1">
+              {siteContent.nav.links.map((link) =>
+                isHashLink(link.href) ? (
+                  <button
+                    key={link.href}
+                    onClick={() => handleNavClick(link.href)}
+                    className={`px-4 py-2 text-[13px] font-medium rounded-lg transition-all duration-300 cursor-pointer ${
+                      isScrolled
+                        ? "text-muted hover:text-navy hover:bg-light-gray"
+                        : "text-white/70 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`px-4 py-2 text-[13px] font-medium rounded-lg transition-all duration-300 ${
+                      isScrolled
+                        ? "text-muted hover:text-navy hover:bg-light-gray"
+                        : "text-white/70 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
+              <div className="w-px h-5 bg-white/15 mx-2" />
               <button
                 onClick={() => handleNavClick("#contact")}
-                className="bg-teal hover:bg-teal-light text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-teal/25 cursor-pointer"
+                className="bg-teal hover:bg-teal-light text-white px-5 py-2 rounded-lg text-[13px] font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-teal/20 cursor-pointer"
               >
                 {siteContent.nav.cta}
               </button>
@@ -101,13 +140,17 @@ export default function Navbar() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-navy hover:bg-light-gray transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-teal/50 focus-visible:ring-offset-2"
+              className={`md:hidden p-2 rounded-lg transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-teal/50 ${
+                isScrolled || isMobileMenuOpen
+                  ? "text-navy hover:bg-light-gray"
+                  : "text-white hover:bg-white/10"
+              }`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5" />
               )}
             </button>
           </div>
@@ -126,7 +169,7 @@ export default function Navbar() {
           >
             {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-navy/50 backdrop-blur-sm"
+              className="absolute inset-0 bg-navy/60 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
@@ -139,24 +182,41 @@ export default function Navbar() {
               className="absolute top-0 right-0 h-full w-72 bg-white shadow-2xl"
             >
               <div className="flex flex-col pt-20 px-6">
-                {siteContent.nav.links.map((link, i) => (
-                  <motion.button
-                    key={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.05 }}
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-left py-3 text-lg font-medium text-navy hover:text-teal transition-colors border-b border-light-gray cursor-pointer"
-                  >
-                    {link.label}
-                  </motion.button>
-                ))}
+                {siteContent.nav.links.map((link, i) =>
+                  isHashLink(link.href) ? (
+                    <motion.button
+                      key={link.href}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.05 }}
+                      onClick={() => handleNavClick(link.href)}
+                      className="text-left py-3.5 text-base font-medium text-navy hover:text-teal transition-colors border-b border-border-light cursor-pointer"
+                    >
+                      {link.label}
+                    </motion.button>
+                  ) : (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + i * 0.05 }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block py-3.5 text-base font-medium text-navy hover:text-teal transition-colors border-b border-border-light"
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  )
+                )}
                 <motion.button
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35 }}
                   onClick={() => handleNavClick("#contact")}
-                  className="mt-6 bg-teal hover:bg-teal-light text-white px-5 py-3 rounded-full text-base font-semibold transition-all cursor-pointer"
+                  className="mt-8 bg-teal hover:bg-teal-light text-white px-5 py-3 rounded-lg text-base font-semibold transition-all cursor-pointer"
                 >
                   {siteContent.nav.cta}
                 </motion.button>

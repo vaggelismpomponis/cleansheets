@@ -1,8 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import Problem from "@/components/sections/Problem";
-import HowItWorks from "@/components/sections/HowItWorks";
-import Testimonials from "@/components/sections/Testimonials";
+import Services from "@/components/sections/Services";
 import FAQ from "@/components/sections/FAQ";
 import LeadForm from "@/components/sections/LeadForm";
 import Footer from "@/components/sections/Footer";
@@ -15,8 +14,7 @@ export default function Home() {
       <main>
         <Hero />
         <Problem />
-        <HowItWorks />
-        <Testimonials />
+        <Services />
         <FAQ />
         <LeadForm />
       </main>

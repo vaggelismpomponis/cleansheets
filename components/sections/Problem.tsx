@@ -18,9 +18,9 @@ export default function Problem() {
   };
 
   return (
-    <section id="problem" className="section-padding bg-warm-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+    <section id="problem" className="section-padding bg-white relative overflow-hidden">
+      {/* Top divider */}
+      <div className="section-divider absolute top-0 left-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -29,23 +29,26 @@ export default function Problem() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-16"
+          className="max-w-2xl mb-16 lg:mb-20"
         >
-          <motion.span
-            variants={fadeInUp}
-            className="inline-block text-teal text-sm font-semibold tracking-wider uppercase mb-3"
-          >
+          <motion.span variants={fadeInUp} className="section-label mb-4 block">
             {siteContent.problem.sectionLabel}
           </motion.span>
           <motion.h2
             variants={fadeInUp}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-navy"
+            className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-navy mb-5 leading-tight"
           >
             {siteContent.problem.title}
           </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="text-lg text-muted leading-relaxed"
+          >
+            {siteContent.problem.subtitle}
+          </motion.p>
         </motion.div>
 
-        {/* Problem Cards */}
+        {/* Problem Cards — Editorial style with left accent */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -59,25 +62,24 @@ export default function Problem() {
               <motion.div
                 key={i}
                 variants={fadeInUp}
-                className="card-hover group bg-white rounded-2xl p-8 border border-card-border relative overflow-hidden"
+                className="group relative bg-warm-white rounded-xl p-7 lg:p-8 border border-transparent hover:border-border transition-all duration-400"
               >
-                {/* Hover gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Left accent bar */}
+                <div className="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-teal/40 to-teal/10 group-hover:from-teal group-hover:to-teal/40 transition-all duration-500" />
 
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-xl bg-teal/10 flex items-center justify-center mb-6 text-teal group-hover:bg-teal group-hover:text-white transition-all duration-300">
-                    <IconComponent className="w-6 h-6" />
+                <div className="pl-4">
+                  {/* Icon */}
+                  <div className="w-10 h-10 rounded-lg bg-teal/8 flex items-center justify-center mb-5 text-teal group-hover:bg-teal/12 transition-colors duration-300">
+                    <IconComponent className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xl font-bold text-navy mb-3">
+
+                  <h3 className="text-lg font-bold text-navy mb-2.5 tracking-tight">
                     {card.title}
                   </h3>
-                  <p className="text-muted leading-relaxed">
+                  <p className="text-[15px] text-muted leading-relaxed">
                     {card.description}
                   </p>
                 </div>
-
-                {/* Bottom accent line */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-teal to-teal-light transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
               </motion.div>
             );
           })}
@@ -89,17 +91,17 @@ export default function Problem() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="text-center mt-14"
+          className="mt-14 lg:mt-16 flex flex-col sm:flex-row items-center gap-4 justify-center"
         >
-          <p className="text-lg text-muted mb-5">
+          <p className="text-muted text-base">
             {siteContent.problem.transition}
           </p>
           <button
-            onClick={() => handleScroll("#how-it-works")}
-            className="group inline-flex items-center gap-2 text-teal font-semibold text-lg hover:gap-3 transition-all cursor-pointer"
+            onClick={() => handleScroll("#services")}
+            className="group inline-flex items-center gap-2 text-teal font-semibold text-sm hover:gap-3 transition-all cursor-pointer"
           >
             {siteContent.problem.transitionCta}
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-4 h-4" />
           </button>
         </motion.div>
       </div>

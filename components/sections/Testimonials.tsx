@@ -6,14 +6,16 @@ import { siteContent } from "@/lib/content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function Testimonials() {
+  const content = siteContent.testimonials;
+
   return (
-    <section id="testimonials" className="section-padding bg-cream relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-72 h-72 bg-teal/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-navy/3 rounded-full blur-3xl" />
+    <section id="testimonials" className="relative py-20 md:py-28 overflow-hidden bg-navy">
+      {/* Background */}
+      <div className="absolute inset-0 grid-pattern opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy via-navy-light/50 to-navy" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -23,36 +25,32 @@ export default function Testimonials() {
         >
           <motion.span
             variants={fadeInUp}
-            className="inline-block text-teal text-sm font-semibold tracking-wider uppercase mb-3"
+            className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-teal-light mb-4"
           >
-            {siteContent.testimonials.sectionLabel}
+            <span className="w-6 h-px bg-teal-light" />
+            {content.sectionLabel}
+            <span className="w-6 h-px bg-teal-light" />
           </motion.span>
           <motion.h2
             variants={fadeInUp}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-4"
+            className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-white mb-6 leading-tight"
           >
-            {siteContent.testimonials.title}
+            {content.title}
           </motion.h2>
 
-          {/* Review Score */}
+          {/* Review score badge */}
           <motion.div
             variants={fadeInUp}
-            className="inline-flex items-center gap-3 bg-white rounded-full px-6 py-3 shadow-md mt-4"
+            className="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-5 py-2.5"
           >
-            <div className="flex gap-0.5">
+            <div className="flex items-center gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-5 h-5 text-amber-400 fill-amber-400"
-                />
+                <Star key={i} className="w-3.5 h-3.5 fill-gold text-gold" />
               ))}
             </div>
-            <span className="text-lg font-bold text-navy">
-              {siteContent.testimonials.reviewScore}
-            </span>
-            <span className="text-muted text-sm">
-              από {siteContent.testimonials.reviewCount}
-            </span>
+            <span className="text-sm font-semibold text-white">{content.reviewScore}</span>
+            <span className="w-px h-4 bg-white/15" />
+            <span className="text-xs text-white/50">{content.reviewCount}</span>
           </motion.div>
         </motion.div>
 
@@ -62,49 +60,41 @@ export default function Testimonials() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={staggerContainer}
-          className="grid md:grid-cols-3 gap-6 lg:gap-8"
+          className="grid md:grid-cols-3 gap-5 lg:gap-6"
         >
-          {siteContent.testimonials.items.map((item, i) => (
+          {content.items.map((testimonial, i) => (
             <motion.div
               key={i}
               variants={fadeInUp}
-              className="card-hover bg-white rounded-2xl p-8 relative group"
-              style={{
-                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.04), 0 2px 4px -2px rgb(0 0 0 / 0.03)",
-              }}
+              className="relative bg-white/[0.04] border border-white/[0.08] rounded-xl p-7 lg:p-8 hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-400"
             >
               {/* Quote icon */}
-              <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                <Quote className="w-10 h-10 text-teal" />
-              </div>
+              <Quote className="w-8 h-8 text-teal/30 mb-5 -scale-x-100" />
+
+              {/* Quote text */}
+              <p className="text-white/80 text-[15px] leading-relaxed mb-7 font-light">
+                &ldquo;{testimonial.quote}&rdquo;
+              </p>
 
               {/* Stars */}
-              <div className="flex gap-0.5 mb-4">
-                {[...Array(item.rating)].map((_, j) => (
-                  <Star
-                    key={j}
-                    className="w-4 h-4 text-amber-400 fill-amber-400"
-                  />
+              <div className="flex items-center gap-0.5 mb-5">
+                {[...Array(testimonial.rating)].map((_, j) => (
+                  <Star key={j} className="w-3.5 h-3.5 fill-gold text-gold" />
                 ))}
               </div>
 
-              {/* Quote text */}
-              <p className="text-navy text-lg leading-relaxed mb-6 font-medium italic">
-                &ldquo;{item.quote}&rdquo;
-              </p>
-
               {/* Author */}
-              <div className="flex items-center gap-3">
-                {/* Avatar */}
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal/20 to-navy/10 flex items-center justify-center">
-                  <span className="text-lg font-bold text-navy">
-                    {item.name.charAt(0)}
-                  </span>
+              <div className="flex items-center gap-3 pt-5 border-t border-white/[0.06]">
+                {/* Avatar placeholder */}
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal/30 to-teal-dark/30 flex items-center justify-center text-sm font-bold text-teal-light">
+                  {testimonial.name.charAt(0)}
                 </div>
                 <div>
-                  <div className="font-semibold text-navy">{item.name}</div>
-                  <div className="text-sm text-muted">
-                    {item.city} · {item.properties}
+                  <div className="text-sm font-semibold text-white">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-xs text-white/40">
+                    {testimonial.city} · {testimonial.properties}
                   </div>
                 </div>
               </div>
