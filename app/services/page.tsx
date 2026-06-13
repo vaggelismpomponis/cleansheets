@@ -248,7 +248,6 @@ export default function ServicesPage() {
         {/* Bottom CTA */}
         <section className="section-padding bg-navy relative overflow-hidden">
           <div className="absolute inset-0 grid-pattern opacity-30" />
-          <div className="absolute bottom-0 left-0 right-0 animated-gradient-line" />
 
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
             <motion.div
