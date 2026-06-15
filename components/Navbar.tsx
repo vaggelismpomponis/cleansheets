@@ -82,16 +82,6 @@ export default function Navbar() {
                 }
               }}
             >
-              <div className="relative">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 6h18"/>
-                    <path d="M3 12h18"/>
-                    <path d="M3 18h18"/>
-                    <path d="M20 6l-2 12H6L4 6"/>
-                  </svg>
-                </div>
-              </div>
               <span className={`text-lg font-bold font-heading tracking-tight transition-colors ${
                 isScrolled || isMobileMenuOpen ? "text-navy" : "text-white"
               }`}>

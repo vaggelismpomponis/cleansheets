@@ -59,7 +59,7 @@ export default function Services() {
             return (
               <Link
                 key={i}
-                href={`/services#${service.slug}`}
+                href="/services"
                 className="block group"
               >
                 <motion.div

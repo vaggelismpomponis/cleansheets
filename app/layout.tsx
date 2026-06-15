@@ -17,7 +17,7 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Καθαρισμός & Ασφάλεια Airbnb | CleanSheets — Χωρίς Στρες",
+  title: "Καθαρισμός & Ασφάλεια Airbnb | Ephtopia Cleans — Χωρίς Στρες",
   description:
     "Επαγγελματικός καθαρισμός Airbnb και κάλυψη κλοπής ενοικιαστών στην Ελλάδα. Αυτόματος συντονισμός, φωτογραφική τεκμηρίωση, αποζημίωση εντός 5 ημερών.",
   keywords: [
@@ -28,18 +28,18 @@ export const metadata: Metadata = {
     "Airbnb ασφάλεια",
     "καθαρισμός καταλύματος",
   ],
-  authors: [{ name: "CleanSheets" }],
+  authors: [{ name: "Ephtopia Cleans" }],
   openGraph: {
-    title: "Καθαρισμός & Ασφάλεια Airbnb | CleanSheets",
+    title: "Καθαρισμός & Ασφάλεια Airbnb | Ephtopia Cleans",
     description:
       "Επαγγελματικός καθαρισμός + ασφάλεια από κλοπή ενοικιαστών. Μία υπηρεσία. Μηδέν στρες.",
     type: "website",
     locale: "el_GR",
-    siteName: "CleanSheets",
+    siteName: "Ephtopia Cleans",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Καθαρισμός & Ασφάλεια Airbnb | CleanSheets",
+    title: "Καθαρισμός & Ασφάλεια Airbnb | Ephtopia Cleans",
     description:
       "Επαγγελματικός καθαρισμός + ασφάλεια από κλοπή ενοικιαστών. Μία υπηρεσία. Μηδέν στρες.",
   },
@@ -57,9 +57,10 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "CleanSheets",
+    name: "Ephtopia Cleans",
     description:
       "Επαγγελματικός καθαρισμός και ασφάλεια έναντι κλοπής για ιδιοκτήτες Airbnb στην Ελλάδα.",
+    url: "https://ephtopia-cleans.gr",
     areaServed: [
       { "@type": "City", name: "Αθήνα" },
       { "@type": "City", name: "Θεσσαλονίκη" },

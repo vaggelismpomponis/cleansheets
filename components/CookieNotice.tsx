@@ -8,7 +8,7 @@ export default function CookieNotice() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("cleansheets-cookie-consent");
+    const consent = localStorage.getItem("ephtopia-cookie-consent");
     if (!consent) {
       const timer = setTimeout(() => setIsVisible(true), 2000);
       return () => clearTimeout(timer);
@@ -16,12 +16,12 @@ export default function CookieNotice() {
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem("cleansheets-cookie-consent", "accepted");
+    localStorage.setItem("ephtopia-cookie-consent", "accepted");
     setIsVisible(false);
   };
 
   const handleDismiss = () => {
-    localStorage.setItem("cleansheets-cookie-consent", "dismissed");
+    localStorage.setItem("ephtopia-cookie-consent", "dismissed");
     setIsVisible(false);
   };
 

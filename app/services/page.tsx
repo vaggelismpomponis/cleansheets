@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -25,17 +25,9 @@ const iconMap = {
 };
 
 export default function ServicesPage() {
-  // Handle hash-based scrolling on mount (when arriving from homepage)
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 300);
-    }
+  const scrollToService = useCallback((slug: string) => {
+    const el = document.getElementById(slug);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   const pageContent = siteContent.servicesPage;
@@ -88,14 +80,14 @@ export default function ServicesPage() {
                 {pageContent.items.map((item) => {
                   const IconComp = iconMap[item.icon as keyof typeof iconMap] || Sparkles;
                   return (
-                    <a
+                    <button
                       key={item.slug}
-                      href={`#${item.slug}`}
-                      className="group inline-flex items-center gap-2 bg-white/[0.05] border border-white/[0.08] hover:border-teal/30 hover:bg-white/[0.08] px-4 py-2 rounded-lg text-xs font-medium text-white/70 hover:text-teal-light transition-all duration-300"
+                      onClick={() => scrollToService(item.slug)}
+                      className="group inline-flex items-center gap-2 bg-white/[0.05] border border-white/[0.08] hover:border-teal/30 hover:bg-white/[0.08] px-4 py-2 rounded-lg text-xs font-medium text-white/70 hover:text-teal-light transition-all duration-300 cursor-pointer"
                     >
                       <IconComp className="w-3.5 h-3.5 text-teal-light/60" />
                       {item.title}
-                    </a>
+                    </button>
                   );
                 })}
               </motion.div>
@@ -113,9 +105,8 @@ export default function ServicesPage() {
             <section
               key={service.slug}
               id={service.slug}
-              className={`section-padding relative overflow-hidden scroll-mt-20 ${
-                isEven ? "bg-warm-white" : "bg-white"
-              }`}
+              className={`section-padding relative overflow-hidden scroll-mt-20 ${isEven ? "bg-warm-white" : "bg-white"
+                }`}
             >
               {/* Top divider */}
               <div className="section-divider absolute top-0 left-0" />
@@ -127,9 +118,8 @@ export default function ServicesPage() {
                   whileInView="visible"
                   viewport={{ once: true, margin: "-100px" }}
                   variants={staggerContainer}
-                  className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16 ${
-                    isEven ? "lg:flex-row-reverse" : ""
-                  }`}
+                  className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16 ${isEven ? "lg:flex-row-reverse" : ""
+                    }`}
                 >
                   <motion.div
                     variants={fadeInUp}
@@ -266,8 +256,7 @@ export default function ServicesPage() {
                 variants={fadeInUp}
                 className="text-base text-white/50 mb-8 leading-relaxed font-light"
               >
-                Η πρώτη επίσκεψη είναι δωρεάν. Συμπληρώστε τα στοιχεία σας και
-                θα επικοινωνήσουμε εντός 24 ωρών.
+                Συμπληρώστε τα στοιχεία σας και θα επικοινωνήσουμε εντός 24 ωρών.
               </motion.p>
               <motion.div variants={fadeInUp}>
                 <Link
