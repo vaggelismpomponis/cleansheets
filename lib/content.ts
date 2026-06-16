@@ -209,9 +209,6 @@ export const siteContent = {
         title: "Κάλυψη",
         links: [
           { label: "Αθήνα", href: "#" },
-          { label: "Θεσσαλονίκη", href: "#" },
-          { label: "Κρήτη", href: "#" },
-          { label: "Ρόδος", href: "#" },
         ],
       },
       legal: {
@@ -225,8 +222,8 @@ export const siteContent = {
     },
     contact: {
       title: "Επικοινωνία",
-      email: "info@ephtopia-cleans.gr",
-      phone: "+30 210 123 4567",
+      email: "info@ephtopia.eu",
+      phone: "+30 698 2438 719",
     },
     social: {
       instagram: "https://instagram.com/ephtopiacleans",
