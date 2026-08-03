@@ -66,7 +66,7 @@ export function ArrayEditor({
         setTimeout(() => setSaveState('idle'), 2500);
       } else {
         setSaveState('error');
-        setErrorMsg(result.error ?? 'Save failed');
+        setErrorMsg(result.error ?? 'Η αποθήκευση απέτυχε');
         setTimeout(() => setSaveState('idle'), 3000);
       }
     });

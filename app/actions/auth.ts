@@ -14,14 +14,14 @@ export async function loginAction(
   const password = formData.get('password') as string;
 
   if (!email || !password) {
-    return { error: 'Email and password are required.' };
+    return { error: 'Το email και ο κωδικός πρόσβασης είναι υποχρεωτικά.' };
   }
 
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    return { error: 'Invalid email or password. Please try again.' };
+    return { error: 'Μη έγκυρο email ή κωδικός πρόσβασης. Παρακαλώ δοκιμάστε ξανά.' };
   }
 
   redirect('/admin');
