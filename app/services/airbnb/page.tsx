@@ -50,42 +50,47 @@ export default function AirbnbServicesPage() {
   return (
     <>
       <Navbar siteContent={siteContent} />
-      <main>
+      <main className="min-h-screen bg-warm-white">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-navy">
-          <div className="absolute inset-0 grid-pattern opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy via-navy-light/30 to-navy" />
+        <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-slate-100">
           <div className="absolute bottom-0 left-0 right-0 animated-gradient-line" />
+          <div className="absolute top-0 right-0 w-[400px] h-[300px] bg-teal/[0.05] blur-[100px] rounded-full pointer-events-none" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
               <motion.div variants={fadeInUp}>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 text-xs text-white/40 hover:text-teal-light transition-colors mb-8"
+                  className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 hover:text-teal transition-colors mb-8 bg-white border border-slate-200 px-4 py-2 rounded-full shadow-sm"
                 >
-                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <ArrowLeft className="w-4 h-4" />
                   Όλες οι Υπηρεσίες
                 </Link>
               </motion.div>
 
+              <motion.div
+                variants={fadeInUp}
+                className="w-16 h-16 rounded-2xl bg-teal/10 text-teal flex items-center justify-center mx-auto mb-6 border border-teal/20"
+              >
+                <Sparkles className="w-8 h-8" />
+              </motion.div>
+
               <motion.span
                 variants={fadeInUp}
-                className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-teal-light mb-6"
+                className="section-label justify-center mb-6 block"
               >
-                <span className="w-6 h-px bg-teal-light" />
                 Airbnb
               </motion.span>
 
               <motion.h1
                 variants={fadeInUp}
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-800 leading-tight tracking-tight max-w-4xl mx-auto"
               >
                 {pageContent.title}
               </motion.h1>
               <motion.p
                 variants={fadeInUp}
-                className="mt-6 text-lg sm:text-xl text-white/50 max-w-3xl mx-auto leading-relaxed font-light"
+                className="mt-6 text-lg sm:text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed font-light"
               >
                 {pageContent.subtitle}
               </motion.p>
@@ -98,9 +103,9 @@ export default function AirbnbServicesPage() {
                     <a
                       key={item.slug}
                       href={`#${item.slug}`}
-                      className="group inline-flex items-center gap-2 bg-white/[0.05] border border-white/[0.08] hover:border-teal/30 hover:bg-white/[0.08] px-4 py-2 rounded-lg text-xs font-medium text-white/70 hover:text-teal-light transition-all duration-300"
+                      className="group inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-teal/30 hover:bg-teal/5 px-4 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-teal transition-all duration-300 shadow-sm"
                     >
-                      <IconComp className="w-3.5 h-3.5 text-teal-light/60" />
+                      <IconComp className="w-3.5 h-3.5 text-teal/60" />
                       {item.title}
                     </a>
                   );

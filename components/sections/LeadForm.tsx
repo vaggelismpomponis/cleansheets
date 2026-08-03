@@ -160,7 +160,7 @@ export default function LeadForm({ siteContent }: LeadFormProps) {
                             id="email"
                             type="email"
                             placeholder={content.fields.email.placeholder}
-                            className={`h-12 bg-white text-slate-800 border-slate-200 hover:border-slate-300 focus-visible:ring-teal/30 placeholder:text-slate-300 transition-all ${errors.email ? "border-red-300 focus-visible:ring-red-300" : ""
+                            className={`h-12 bg-white focus:bg-white focus-visible:bg-white text-slate-800 border-slate-200 hover:border-slate-300 focus-visible:border-teal focus-visible:ring-2 focus-visible:ring-teal/20 placeholder:text-slate-300 transition-all ${errors.email ? "border-red-300 focus-visible:ring-red-300" : ""
                               }`}
                           />
                           {errors.email && (
@@ -178,7 +178,7 @@ export default function LeadForm({ siteContent }: LeadFormProps) {
                             id="phone"
                             type="tel"
                             placeholder={content.fields.phone.placeholder}
-                            className={`h-12 bg-white text-slate-800 border-slate-200 hover:border-slate-300 focus-visible:ring-teal/30 placeholder:text-slate-300 transition-all ${errors.phone ? "border-red-300 focus-visible:ring-red-300" : ""
+                            className={`h-12 bg-white focus:bg-white focus-visible:bg-white text-slate-800 border-slate-200 hover:border-slate-300 focus-visible:border-teal focus-visible:ring-2 focus-visible:ring-teal/20 placeholder:text-slate-300 transition-all ${errors.phone ? "border-red-300 focus-visible:ring-red-300" : ""
                               }`}
                           />
                           {errors.phone && (
