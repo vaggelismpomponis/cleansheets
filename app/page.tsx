@@ -6,19 +6,22 @@ import FAQ from "@/components/sections/FAQ";
 import LeadForm from "@/components/sections/LeadForm";
 import Footer from "@/components/sections/Footer";
 import CookieNotice from "@/components/CookieNotice";
+import { getContent } from "@/lib/get-content";
 
-export default function Home() {
+export default async function Home() {
+  const { siteContent, faqItems, pricingTiers } = await getContent();
+
   return (
     <>
-      <Navbar />
+      <Navbar siteContent={siteContent} />
       <main>
-        <Hero />
-        <Problem />
-        <Services />
-        <FAQ />
-        <LeadForm />
+        <Hero siteContent={siteContent} />
+        <Problem siteContent={siteContent} />
+        <Services siteContent={siteContent} />
+        <FAQ siteContent={siteContent} faqItems={faqItems} />
+        <LeadForm siteContent={siteContent} />
       </main>
-      <Footer />
+      <Footer siteContent={siteContent} />
       <CookieNotice />
     </>
   );

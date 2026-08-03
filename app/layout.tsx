@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Manrope, Source_Sans_3 } from "next/font/google";
+import { Manrope, Source_Sans_3, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -17,31 +20,31 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Καθαρισμός & Ασφάλεια Airbnb | Ephtopia Cleans — Χωρίς Στρες",
+  title: "Καθαρισμός Airbnb | Ephtopia Cleans — Χωρίς Στρες",
   description:
-    "Επαγγελματικός καθαρισμός Airbnb και κάλυψη κλοπής ενοικιαστών στην Ελλάδα. Αυτόματος συντονισμός, φωτογραφική τεκμηρίωση, αποζημίωση εντός 5 ημερών.",
+    "Επαγγελματικός καθαρισμός Airbnb και αλλαγή κλινοσκεπασμάτων στην Ελλάδα. Εξειδικευμένο προσωπικό, φωτογραφική τεκμηρίωση, αυτόματος συντονισμός.",
   keywords: [
     "Airbnb καθαρισμός",
-    "κλοπή ενοικιαστή",
+    "κλινοσκεπάσματα",
     "property management Ελλάδα",
     "turnover cleaning",
-    "Airbnb ασφάλεια",
+    "πιστοποιημένο προσωπικό",
     "καθαρισμός καταλύματος",
   ],
   authors: [{ name: "Ephtopia Cleans" }],
   openGraph: {
-    title: "Καθαρισμός & Ασφάλεια Airbnb | Ephtopia Cleans",
+    title: "Καθαρισμός Airbnb | Ephtopia Cleans",
     description:
-      "Επαγγελματικός καθαρισμός + ασφάλεια από κλοπή ενοικιαστών. Μία υπηρεσία. Μηδέν στρες.",
+      "Επαγγελματικός καθαρισμός & αλλαγή κλινοσκεπασμάτων με πιστοποιημένο προσωπικό. Μία υπηρεσία. Μηδέν στρες.",
     type: "website",
     locale: "el_GR",
     siteName: "Ephtopia Cleans",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Καθαρισμός & Ασφάλεια Airbnb | Ephtopia Cleans",
+    title: "Καθαρισμός Airbnb | Ephtopia Cleans",
     description:
-      "Επαγγελματικός καθαρισμός + ασφάλεια από κλοπή ενοικιαστών. Μία υπηρεσία. Μηδέν στρες.",
+      "Επαγγελματικός καθαρισμός & αλλαγή κλινοσκεπασμάτων με πιστοποιημένο προσωπικό. Μία υπηρεσία. Μηδέν στρες.",
   },
   robots: {
     index: true,
@@ -59,13 +62,11 @@ export default function RootLayout({
     "@type": "LocalBusiness",
     name: "Ephtopia Cleans",
     description:
-      "Επαγγελματικός καθαρισμός και ασφάλεια έναντι κλοπής για ιδιοκτήτες Airbnb στην Ελλάδα.",
+      "Επαγγελματικός καθαρισμός και αλλαγή κλινοσκεπασμάτων για ιδιοκτήτες Airbnb στην Αθήνα & Αττική.",
     url: "https://ephtopia-cleans.gr",
     areaServed: [
       { "@type": "City", name: "Αθήνα" },
-      { "@type": "City", name: "Θεσσαλονίκη" },
-      { "@type": "City", name: "Κρήτη" },
-      { "@type": "City", name: "Ρόδος" },
+      { "@type": "AdministrativeArea", name: "Αττική" },
     ],
     serviceType: ["Cleaning Service", "Property Protection"],
     priceRange: "€35 - €149",
@@ -74,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="el"
-      className={`${manrope.variable} ${sourceSans.variable} antialiased`}
+      className={cn("antialiased", manrope.variable, sourceSans.variable, "font-sans", geist.variable)}
     >
       <head>
         <script

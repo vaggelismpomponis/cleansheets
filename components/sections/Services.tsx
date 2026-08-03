@@ -2,18 +2,26 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Sparkles, ShieldCheck, Camera, CalendarRange, ArrowUpRight } from "lucide-react";
-import { siteContent } from "@/lib/content";
+import { Sparkles, SprayCan, ShieldCheck, Camera, CalendarRange, Building2, ArrowUpRight } from "lucide-react";
+import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const iconMap = {
   Sparkles,
+  SprayCan,
   ShieldCheck,
   Camera,
   CalendarRange,
+  Building2,
 };
 
-export default function Services() {
+interface ServicesProps {
+  siteContent: SiteContent;
+}
+
+export default function Services({ siteContent }: ServicesProps) {
   return (
     <section id="services" className="section-padding bg-warm-white relative overflow-hidden">
       {/* Top divider */}
@@ -59,46 +67,49 @@ export default function Services() {
             return (
               <Link
                 key={i}
-                href="/services"
-                className="block group"
+                href={"href" in service ? (service as { href: string }).href : "/services"}
+                className="block group h-full"
               >
-                <motion.div
-                  variants={fadeInUp}
-                  className="relative bg-white border border-card-border hover:border-teal/25 rounded-xl p-7 lg:p-8 card-hover overflow-hidden h-full"
-                >
-                  {/* Number + Icon row */}
-                  <div className="flex items-start justify-between mb-6">
-                    <span className="number-badge">{num}</span>
-                    <div className="w-11 h-11 rounded-xl bg-navy/4 text-navy/60 flex items-center justify-center group-hover:bg-teal/10 group-hover:text-teal transition-all duration-400">
-                      <IconComponent className="w-5 h-5" />
-                    </div>
-                  </div>
+                <motion.div variants={fadeInUp} className="h-full">
+                  <Card className="relative bg-white border-card-border hover:border-teal/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-400 h-full overflow-hidden">
+                    <CardContent className="p-7 lg:p-8 flex flex-col h-full">
+                      {/* Number + Icon row */}
+                      <div className="flex items-start justify-between mb-6">
+                        <Badge variant="secondary" className="font-heading text-xs font-bold text-muted-light bg-light-gray">
+                          {num}
+                        </Badge>
+                        <div className="w-11 h-11 rounded-xl bg-navy/5 text-navy/60 flex items-center justify-center group-hover:bg-teal group-hover:text-white transition-all duration-400 shadow-inner">
+                          <IconComponent className="w-5 h-5" />
+                        </div>
+                      </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-bold text-navy mb-3 tracking-tight group-hover:text-teal transition-colors duration-300">
-                    {service.title}
-                  </h3>
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-navy mb-3 tracking-tight group-hover:text-teal transition-colors duration-300">
+                        {service.title}
+                      </h3>
 
-                  {/* Description */}
-                  <p className="text-[15px] text-muted leading-relaxed mb-6">
-                    {service.description}
-                  </p>
+                      {/* Description */}
+                      <p className="text-[15px] text-muted leading-relaxed mb-6 flex-1">
+                        {service.description}
+                      </p>
 
-                  {/* Features — minimal */}
-                  <ul className="space-y-2 mb-6 border-t border-border-light pt-5">
-                    {service.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-2.5 text-[13px] text-navy/80 font-medium">
-                        <div className="w-1 h-1 rounded-full bg-teal shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                      {/* Features — minimal */}
+                      <ul className="space-y-2.5 mb-6 border-t border-border-light pt-6">
+                        {service.features.map((feature, fIdx) => (
+                          <li key={fIdx} className="flex items-center gap-3 text-[13px] text-navy/80 font-medium">
+                            <div className="w-1.5 h-1.5 rounded-full bg-teal shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
 
-                  {/* Learn More */}
-                  <div className="flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:text-teal-light transition-colors">
-                    <span>Μάθετε Περισσότερα</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
+                      {/* Learn More */}
+                      <div className="flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:text-teal-light transition-colors mt-auto">
+                        <span>Μάθετε Περισσότερα</span>
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </div>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               </Link>
             );

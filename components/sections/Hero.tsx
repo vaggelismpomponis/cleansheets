@@ -4,10 +4,16 @@ import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { siteContent } from "@/lib/content";
+import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
-export default function Hero() {
+interface HeroProps {
+  siteContent: SiteContent;
+}
+
+export default function Hero({ siteContent }: HeroProps) {
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -16,25 +22,25 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-navy"
+      className="relative min-h-screen flex items-center overflow-hidden bg-slate-100"
     >
-      {/* Background Image */}
+      {/* Background Image — visible but light */}
       <div className="absolute inset-0">
         <Image
           src="/hero-bg.png"
           alt=""
           fill
           priority
-          className="object-cover"
+          className="object-cover opacity-40"
           sizes="100vw"
         />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-navy/30" />
+        {/* Light directional overlay — keeps text side clear */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/75 to-white/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-100/80 via-transparent to-transparent" />
       </div>
 
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 grid-pattern opacity-40" />
+      {/* Subtle teal glow top-right */}
+      <div className="absolute top-0 right-0 w-[600px] h-[500px] bg-teal/[0.05] blur-[120px] rounded-full pointer-events-none" />
 
       {/* Animated gradient accent line at bottom */}
       <div className="absolute bottom-0 left-0 right-0 animated-gradient-line" />
@@ -48,8 +54,8 @@ export default function Hero() {
           >
             {/* Label */}
             <motion.div variants={fadeInUp} className="mb-8">
-              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-teal-light">
-                <span className="w-6 h-px bg-teal-light" />
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.2em] uppercase text-teal">
+                <span className="w-6 h-px bg-teal" />
                 Νέα υπηρεσία στην Ελλάδα
               </span>
             </motion.div>
@@ -57,7 +63,7 @@ export default function Hero() {
             {/* Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 leading-[1.08] tracking-tight"
             >
               {siteContent.hero.headline}
               <br />
@@ -69,7 +75,7 @@ export default function Hero() {
             {/* Subheadline */}
             <motion.p
               variants={fadeInUp}
-              className="mt-7 text-lg sm:text-xl text-white/60 max-w-xl leading-relaxed font-light"
+              className="mt-7 text-lg sm:text-xl text-slate-500 max-w-xl leading-relaxed font-light"
             >
               {siteContent.hero.subheadline}
             </motion.p>
@@ -79,43 +85,48 @@ export default function Hero() {
               variants={fadeInUp}
               className="mt-10 flex flex-col sm:flex-row gap-4"
             >
-              <button
+              <Button
                 onClick={() => handleScroll("#contact")}
-                className="group inline-flex items-center justify-center gap-2.5 bg-teal hover:bg-teal-light text-white px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-teal/20 cursor-pointer"
+                className="bg-teal hover:bg-teal-dark text-white h-14 px-8 rounded-lg text-base font-semibold shadow-lg shadow-teal/20 transition-all hover:shadow-xl hover:shadow-teal/25 group"
               >
                 {siteContent.hero.ctaPrimary}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
               <Link
                 href="/services"
-                className="group inline-flex items-center justify-center gap-2.5 border border-white/20 hover:border-white/40 text-white/80 hover:text-white px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 hover:bg-white/5"
+                className="h-14 px-8 rounded-lg text-base font-semibold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-all inline-flex items-center justify-center group shadow-sm"
               >
                 {siteContent.hero.ctaSecondary}
-                <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                <ChevronDown className="w-4 h-4 ml-2 group-hover:translate-y-0.5 transition-transform text-slate-400" />
               </Link>
             </motion.div>
 
             {/* Trust Stats */}
             <motion.div
               variants={fadeInUp}
-              className="mt-16 flex items-center gap-10"
+              className="mt-16"
             >
-              {siteContent.hero.trustStats.map((stat, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div>
-                    <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                      {stat.value}
+              <Card className="bg-white border-slate-200 shadow-md inline-flex p-1">
+                <CardContent className="flex items-center gap-8 p-4 sm:px-8 sm:py-5">
+                  {siteContent.hero.trustStats.map((stat, i) => (
+                    <div key={i} className="flex items-center gap-8">
+                      <div>
+                        <div className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
+                          {stat.value}
+                        </div>
+                        <div className="text-xs text-slate-400 font-medium tracking-wide uppercase mt-1">
+                          {stat.label}
+                        </div>
+                      </div>
+                      {i < siteContent.hero.trustStats.length - 1 && (
+                        <div className="w-px h-10 bg-slate-200" />
+                      )}
                     </div>
-                    <div className="text-xs text-white/40 font-medium tracking-wide uppercase mt-0.5">
-                      {stat.label}
-                    </div>
-                  </div>
-                  {i < siteContent.hero.trustStats.length - 1 && (
-                    <div className="w-px h-10 bg-white/10 ml-7" />
-                  )}
-                </div>
-              ))}
+                  ))}
+                </CardContent>
+              </Card>
             </motion.div>
+
           </motion.div>
         </div>
       </div>
@@ -130,9 +141,9 @@ export default function Hero() {
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center pt-1.5"
+          className="w-5 h-8 rounded-full border border-slate-300 flex items-start justify-center pt-1.5"
         >
-          <motion.div className="w-1 h-1.5 rounded-full bg-white/50" />
+          <motion.div className="w-1 h-1.5 rounded-full bg-slate-400" />
         </motion.div>
       </motion.div>
     </section>

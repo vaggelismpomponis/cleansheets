@@ -1,4 +1,96 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0C1926;
+  --card: #ffffff;
+  --card-foreground: #0C1926;
+  --popover: #ffffff;
+  --popover-foreground: #0C1926;
+  --primary: #10B981;
+  --primary-foreground: #ffffff;
+  --secondary: #162336;
+  --secondary-foreground: #ffffff;
+  --muted: #F3F4F6;
+  --muted-foreground: #8A94A1;
+  --accent: #F8F7F4;
+  --accent-foreground: #0C1926;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: #E2E4E8;
+  --input: #E2E4E8;
+  --ring: #10B981;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  a, button, [role="button"], [data-slot="button"] {
+    cursor: pointer !important;
+  }
+}
 
 /* ============================================
    CleanSheets — Design System v2.0
@@ -11,16 +103,16 @@
   --navy-light: #162336;
   --navy-dark: #070F18;
   --navy-medium: #1A2D42;
-  --teal: #0D9488;
-  --teal-light: #14B8A6;
-  --teal-dark: #0A7A70;
-  --teal-muted: rgba(13, 148, 136, 0.08);
+  --teal: #10B981;
+  --teal-light: #34D399;
+  --teal-dark: #059669;
+  --teal-muted: rgba(16, 185, 129, 0.08);
   --gold: #C9A84C;
   --gold-light: #D4B85E;
   --gold-muted: rgba(201, 168, 76, 0.12);
 
   /* Neutrals */
-  --warm-white: #F8F7F4;
+  --warm-white: #F8FAFC;
   --cream: #F1EFE9;
   --stone: #E8E5DE;
   --light-gray: #F3F4F6;
@@ -41,7 +133,7 @@
   --shadow-md: 0 4px 8px -2px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
   --shadow-lg: 0 12px 24px -4px rgb(0 0 0 / 0.08), 0 4px 8px -4px rgb(0 0 0 / 0.03);
   --shadow-xl: 0 24px 48px -8px rgb(0 0 0 / 0.1), 0 8px 16px -4px rgb(0 0 0 / 0.04);
-  --shadow-glow-teal: 0 0 40px rgba(13, 148, 136, 0.15);
+  --shadow-glow-teal: 0 0 40px rgba(16, 185, 129, 0.15);
   --shadow-glow-gold: 0 0 40px rgba(201, 168, 76, 0.12);
 }
 
@@ -158,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  background: linear-gradient(135deg, var(--teal-dark), var(--teal));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

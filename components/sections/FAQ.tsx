@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Plus, Minus } from "lucide-react";
-import { siteContent } from "@/lib/content";
-import { faqItems } from "@/lib/constants";
+import { motion } from "framer-motion";
+import type { SiteContent, FAQItem } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+interface FAQProps {
+  siteContent: SiteContent;
+  faqItems: FAQItem[];
+}
 
+export default function FAQ({ siteContent, faqItems }: FAQProps) {
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -60,57 +66,24 @@ export default function FAQ() {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={staggerContainer}
-          className="space-y-2"
         >
-          {faqItems.map((item, i) => {
-            const isOpen = openIndex === i;
-            return (
-              <motion.div
-                key={i}
-                variants={fadeInUp}
-                className={`bg-white rounded-xl border transition-all duration-300 ${
-                  isOpen ? "border-teal/20 shadow-md" : "border-card-border hover:border-border"
-                }`}
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left cursor-pointer group"
-                  aria-expanded={isOpen}
+          <Accordion className="space-y-4">
+            {faqItems.map((item, i) => (
+              <motion.div key={i} variants={fadeInUp}>
+                <AccordionItem
+                  value={`item-${i}`}
+                  className="bg-white rounded-xl border border-card-border px-5 sm:px-6 hover:border-teal/30 transition-colors data-[state=open]:border-teal/50 data-[state=open]:shadow-md"
                 >
-                  <span className={`text-[15px] sm:text-base font-semibold transition-colors ${
-                    isOpen ? "text-teal" : "text-navy group-hover:text-teal"
-                  }`}>
+                  <AccordionTrigger className="text-left text-[15px] sm:text-base font-semibold text-navy hover:text-teal hover:no-underline py-5">
                     {item.question}
-                  </span>
-                  <div className={`shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                    isOpen ? "bg-teal text-white" : "bg-navy/[0.04] text-muted"
-                  }`}>
-                    {isOpen ? (
-                      <Minus className="w-3.5 h-3.5" />
-                    ) : (
-                      <Plus className="w-3.5 h-3.5" />
-                    )}
-                  </div>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-[15px] text-muted leading-relaxed">
-                        {item.answer}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-[15px] text-muted leading-relaxed pb-6">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
               </motion.div>
-            );
-          })}
+            ))}
+          </Accordion>
         </motion.div>
       </div>
     </section>

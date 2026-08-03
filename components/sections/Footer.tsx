@@ -3,14 +3,18 @@
 import { motion } from "framer-motion";
 import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
-import { siteContent } from "@/lib/content";
+import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
-export default function Footer() {
+interface FooterProps {
+  siteContent: SiteContent;
+}
+
+export default function Footer({ siteContent }: FooterProps) {
   return (
-    <footer className="bg-navy-dark text-white/60 relative overflow-hidden">
+    <footer className="bg-[#27272A] text-slate-400 relative overflow-hidden">
       {/* Top accent line */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-zinc-600 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <motion.div
@@ -35,25 +39,25 @@ export default function Footer() {
                 {siteContent.brand.name}
               </span>
             </div>
-            <p className="text-sm leading-relaxed max-w-xs text-white/40">
+            <p className="text-sm leading-relaxed max-w-xs text-white">
               {siteContent.footer.description}
             </p>
           </motion.div>
 
           {/* Service Links */}
           <motion.div variants={fadeInUp}>
-            <h4 className="text-white/80 font-semibold text-xs tracking-wider uppercase mb-4">
+            <h4 className="text-white text-sm font-bold tracking-wide uppercase mb-5">
               {siteContent.footer.columns.service.title}
             </h4>
             <ul className="space-y-2.5">
               {siteContent.footer.columns.service.links.map((link) => (
                 <li key={link.label}>
                   {link.href.startsWith("#") ? (
-                    <a href={link.href} className="text-sm text-white/40 hover:text-teal-light transition-colors">
+                    <a href={link.href} className="text-sm text-white hover:text-teal-light transition-colors">
                       {link.label}
                     </a>
                   ) : (
-                    <Link href={link.href} className="text-sm text-white/40 hover:text-teal-light transition-colors">
+                    <Link href={link.href} className="text-sm text-white hover:text-teal-light transition-colors">
                       {link.label}
                     </Link>
                   )}
@@ -64,13 +68,13 @@ export default function Footer() {
 
           {/* Coverage Links */}
           <motion.div variants={fadeInUp}>
-            <h4 className="text-white/80 font-semibold text-xs tracking-wider uppercase mb-4">
+            <h4 className="text-white text-sm font-bold tracking-wide uppercase mb-5">
               {siteContent.footer.columns.coverage.title}
             </h4>
             <ul className="space-y-2.5">
               {siteContent.footer.columns.coverage.links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-white/40 hover:text-teal-light transition-colors">
+                  <a href={link.href} className="text-sm text-white hover:text-teal-light transition-colors">
                     {link.label}
                   </a>
                 </li>
@@ -80,13 +84,13 @@ export default function Footer() {
 
           {/* Legal Links */}
           <motion.div variants={fadeInUp}>
-            <h4 className="text-white/80 font-semibold text-xs tracking-wider uppercase mb-4">
+            <h4 className="text-white text-sm font-bold tracking-wide uppercase mb-5">
               {siteContent.footer.columns.legal.title}
             </h4>
             <ul className="space-y-2.5">
               {siteContent.footer.columns.legal.links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-white/40 hover:text-teal-light transition-colors">
+                  <a href={link.href} className="text-sm text-white hover:text-teal-light transition-colors">
                     {link.label}
                   </a>
                 </li>
@@ -96,14 +100,14 @@ export default function Footer() {
 
           {/* Contact */}
           <motion.div variants={fadeInUp}>
-            <h4 className="text-white/80 font-semibold text-xs tracking-wider uppercase mb-4">
+            <h4 className="text-white text-sm font-bold tracking-wide uppercase mb-5">
               {siteContent.footer.contact.title}
             </h4>
             <ul className="space-y-3">
               <li>
                 <a
                   href={`mailto:${siteContent.footer.contact.email}`}
-                  className="flex items-center gap-2 text-sm text-white/40 hover:text-teal-light transition-colors"
+                  className="flex items-center gap-2 text-sm text-white hover:text-teal-light transition-colors"
                 >
                   <Mail className="w-3.5 h-3.5 shrink-0" />
                   {siteContent.footer.contact.email}
@@ -112,7 +116,7 @@ export default function Footer() {
               <li>
                 <a
                   href={`tel:${siteContent.footer.contact.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-2 text-sm text-white/40 hover:text-teal-light transition-colors"
+                  className="flex items-center gap-2 text-sm text-white hover:text-teal-light transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5 shrink-0" />
                   {siteContent.footer.contact.phone}
@@ -123,12 +127,20 @@ export default function Footer() {
         </motion.div>
 
         {/* Bottom bar */}
-        <div className="mt-14 pt-8 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[11px] text-white/25" suppressHydrationWarning>
+        <div className="mt-14 pt-8 border-t border-zinc-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[11px] text-white" suppressHydrationWarning>
             {siteContent.brand.copyright}
           </p>
-          <p className="text-[11px] text-white/25">
-            Σχεδιάσμος & Υλοποίηση: <a className="text-teal-light/60 hover:text-teal-light transition-colors" href="https://ebomponis.vercel.app" target="_blank" rel="noopener noreferrer">Vaggelis Bomponis</a>
+          <p className="text-[11px] text-white">
+            Σχεδιάσμος &amp; Υλοποίηση:{" "}
+            <a
+              className="text-teal-light hover:text-white transition-colors"
+              href="https://ebomponis.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vaggelis Bomponis
+            </a>
           </p>
         </div>
       </div>

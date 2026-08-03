@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cookie, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export default function CookieNotice() {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,32 +37,35 @@ export default function CookieNotice() {
           transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="fixed bottom-0 left-0 right-0 z-50 p-4"
         >
-          <div className="max-w-3xl mx-auto bg-navy text-white rounded-xl shadow-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 border border-white/[0.06]">
-            <Cookie className="w-4 h-4 text-teal-light shrink-0 mt-0.5 sm:mt-0" />
-            <p className="text-xs text-white/60 flex-1 leading-relaxed">
+          <Card className="max-w-3xl mx-auto bg-navy text-white shadow-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 border border-white/[0.06] backdrop-blur-xl">
+            <Cookie className="w-5 h-5 text-teal shrink-0 mt-0.5 sm:mt-0" />
+            <p className="text-sm text-white/70 flex-1 leading-relaxed">
               Χρησιμοποιούμε cookies για τη βελτίωση της εμπειρίας σας.
               Συνεχίζοντας, αποδέχεστε τη{" "}
-              <a href="#" className="text-teal-light underline hover:text-teal">
+              <a href="#" className="text-teal hover:text-teal-light underline transition-colors">
                 Πολιτική Απορρήτου
               </a>
               .
             </p>
             <div className="flex items-center gap-2 shrink-0">
-              <button
+              <Button
                 onClick={handleAccept}
-                className="bg-teal hover:bg-teal-light text-white text-xs font-medium px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                className="bg-teal hover:bg-teal-light text-white shadow-lg shadow-teal/20"
+                size="sm"
               >
                 Αποδοχή
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleDismiss}
-                className="text-white/30 hover:text-white/60 p-1.5 transition-colors cursor-pointer"
+                variant="ghost"
+                size="icon"
+                className="text-white/40 hover:text-white/80 hover:bg-white/10"
                 aria-label="Dismiss"
               >
-                <X className="w-3.5 h-3.5" />
-              </button>
+                <X className="w-4 h-4" />
+              </Button>
             </div>
-          </div>
+          </Card>
         </motion.div>
       )}
     </AnimatePresence>

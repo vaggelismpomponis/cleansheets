@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, UserX, ShieldAlert, Clock } from "lucide-react";
-import { siteContent } from "@/lib/content";
+import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { Card, CardContent } from "@/components/ui/card";
 
 const iconMap = {
   UserX,
@@ -11,7 +12,11 @@ const iconMap = {
   Clock,
 };
 
-export default function Problem() {
+interface ProblemProps {
+  siteContent: SiteContent;
+}
+
+export default function Problem({ siteContent }: ProblemProps) {
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -59,27 +64,24 @@ export default function Problem() {
           {siteContent.problem.cards.map((card, i) => {
             const IconComponent = iconMap[card.icon as keyof typeof iconMap];
             return (
-              <motion.div
-                key={i}
-                variants={fadeInUp}
-                className="group relative bg-warm-white rounded-xl p-7 lg:p-8 border border-transparent hover:border-border transition-all duration-400"
-              >
-                {/* Left accent bar */}
-                <div className="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-teal/40 to-teal/10 group-hover:from-teal group-hover:to-teal/40 transition-all duration-500" />
+              <motion.div key={i} variants={fadeInUp} className="group">
+                <Card className="relative bg-warm-white border-transparent hover:border-border transition-all duration-400 h-full overflow-hidden hover:shadow-xl hover:-translate-y-1">
+                  {/* Left accent bar */}
+                  <div className="absolute left-0 top-6 bottom-6 w-[3px] rounded-r-full bg-gradient-to-b from-teal/40 to-teal/10 group-hover:from-teal group-hover:to-teal/40 transition-all duration-500" />
+                  <CardContent className="p-7 lg:p-8 pl-8 lg:pl-10">
+                    {/* Icon */}
+                    <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center mb-5 text-teal group-hover:bg-teal group-hover:text-white transition-colors duration-300 shadow-inner">
+                      <IconComponent className="w-5 h-5" />
+                    </div>
 
-                <div className="pl-4">
-                  {/* Icon */}
-                  <div className="w-10 h-10 rounded-lg bg-teal/8 flex items-center justify-center mb-5 text-teal group-hover:bg-teal/12 transition-colors duration-300">
-                    <IconComponent className="w-5 h-5" />
-                  </div>
-
-                  <h3 className="text-lg font-bold text-navy mb-2.5 tracking-tight">
-                    {card.title}
-                  </h3>
-                  <p className="text-[15px] text-muted leading-relaxed">
-                    {card.description}
-                  </p>
-                </div>
+                    <h3 className="text-lg font-bold text-navy mb-3 tracking-tight">
+                      {card.title}
+                    </h3>
+                    <p className="text-[15px] text-muted leading-relaxed">
+                      {card.description}
+                    </p>
+                  </CardContent>
+                </Card>
               </motion.div>
             );
           })}
