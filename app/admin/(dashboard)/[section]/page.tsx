@@ -63,11 +63,11 @@ export default async function SectionEditorPage(props: PageProps<'/admin/[sectio
 
 function EditorCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-5 pb-3 border-b border-slate-100">
+    <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm w-full min-w-0">
+      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 sm:mb-5 pb-3 border-b border-slate-100">
         {title}
       </h3>
-      <div className="space-y-5">{children}</div>
+      <div className="space-y-4 sm:space-y-5">{children}</div>
     </div>
   );
 }

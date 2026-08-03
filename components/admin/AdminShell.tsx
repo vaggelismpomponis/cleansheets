@@ -51,10 +51,10 @@ export function AdminShell({ user, children }: AdminShellProps) {
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       {/* Main content */}
-      <div className="flex flex-col flex-1 overflow-hidden min-w-0">
+      <div className="flex flex-col flex-1 overflow-hidden min-w-0 w-full">
         <TopBar user={user} onMenuClick={() => setMobileOpen(true)} />
-        <main className="flex-1 overflow-auto p-4 lg:p-8">
-          <div className="max-w-4xl mx-auto">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-3.5 sm:p-6 lg:p-8">
+          <div className="max-w-4xl mx-auto w-full">
             {children}
           </div>
         </main>

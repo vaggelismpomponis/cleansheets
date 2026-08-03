@@ -55,16 +55,16 @@ export default async function AdminDashboardPage() {
       </Link>
 
       {/* Section grid */}
-      <div className="grid sm:grid-cols-2 gap-3 lg:gap-4">
+      <div className="grid sm:grid-cols-2 gap-3 lg:gap-4 w-full">
         {sections.map((section) => {
           const Icon = section.icon;
           return (
             <Link
               key={section.href}
               href={section.href}
-              className="group flex items-center gap-4 bg-white hover:bg-slate-50 border border-slate-200 hover:border-teal/30 rounded-xl p-5 transition-all duration-300 shadow-sm hover:shadow-md"
+              className="group flex items-center gap-3 sm:gap-4 bg-white hover:bg-slate-50 border border-slate-200 hover:border-teal/30 rounded-xl p-3.5 sm:p-5 transition-all duration-300 shadow-sm hover:shadow-md min-w-0"
             >
-              <div className="w-11 h-11 rounded-xl bg-teal/10 flex items-center justify-center shrink-0 group-hover:bg-teal/20 transition-colors">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-teal/10 flex items-center justify-center shrink-0 group-hover:bg-teal/20 transition-colors">
                 <Icon className="w-5 h-5 text-teal/70 group-hover:text-teal transition-colors" />
               </div>
               <div className="flex-1 min-w-0">

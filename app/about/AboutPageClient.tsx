@@ -79,13 +79,19 @@ export default function AboutPageClient({ siteContent }: AboutPageClientProps) {
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
-            className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-border-light"
+            className="grid grid-cols-2 sm:grid-cols-3"
           >
             {about.stats.map((stat, i) => (
               <motion.div
                 key={i}
                 variants={fadeInUp}
-                className="py-8 px-6 text-center"
+                className={`py-8 px-6 flex flex-col items-center justify-center text-center ${
+                  i === 1 ? "border-l border-border-light" : ""
+                } ${
+                  i === 2
+                    ? "col-span-2 sm:col-span-1 border-t sm:border-t-0 sm:border-l border-border-light"
+                    : ""
+                }`}
               >
                 <div className="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-1">
                   {stat.value}
@@ -268,7 +274,7 @@ export default function AboutPageClient({ siteContent }: AboutPageClientProps) {
               {/* Compliance badges */}
               <motion.div
                 variants={fadeInUp}
-                className="flex flex-wrap justify-center gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl mx-auto w-full"
               >
                 {[
                   "Ποινικό Μητρώο",
@@ -278,10 +284,10 @@ export default function AboutPageClient({ siteContent }: AboutPageClientProps) {
                 ].map((badge, i) => (
                   <div
                     key={i}
-                    className="inline-flex items-center gap-2 bg-white border border-slate-200 text-slate-600 text-[13px] font-medium px-4 py-2.5 rounded-lg shadow-sm"
+                    className="flex items-center justify-start gap-2.5 bg-white border border-slate-200 text-slate-700 text-sm font-medium px-4 py-3 rounded-xl shadow-sm hover:border-teal/30 transition-all text-left w-full min-w-0"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-teal shrink-0" />
-                    {badge}
+                    <CheckCircle2 className="w-4 h-4 text-teal shrink-0" />
+                    <span>{badge}</span>
                   </div>
                 ))}
               </motion.div>

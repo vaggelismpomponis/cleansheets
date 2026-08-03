@@ -107,14 +107,14 @@ export default function Hero({ siteContent }: HeroProps) {
               className="mt-16"
             >
               <Card className="bg-white border-slate-200 shadow-md inline-flex p-1">
-                <CardContent className="flex items-center gap-8 p-4 sm:px-8 sm:py-5">
+                <CardContent className="flex items-center justify-center gap-8 p-4 sm:px-8 sm:py-5">
                   {siteContent.hero.trustStats.map((stat, i) => (
                     <div key={i} className="flex items-center gap-8">
-                      <div>
-                        <div className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
+                      <div className="flex flex-col items-center justify-center text-center">
+                        <div className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight text-center">
                           {stat.value}
                         </div>
-                        <div className="text-xs text-slate-400 font-medium tracking-wide uppercase mt-1">
+                        <div className="text-xs text-slate-400 font-medium tracking-wide uppercase mt-1 text-center">
                           {stat.label}
                         </div>
                       </div>

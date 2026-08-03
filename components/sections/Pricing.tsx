@@ -55,9 +55,8 @@ export default function Pricing() {
             </span>
             <button
               onClick={() => setIsYearly(!isYearly)}
-              className={`relative w-12 h-6 rounded-full transition-colors duration-300 cursor-pointer ${
-                isYearly ? "bg-teal" : "bg-navy/15"
-              }`}
+              className={`relative w-12 h-6 rounded-full transition-colors duration-300 cursor-pointer ${isYearly ? "bg-teal" : "bg-navy/15"
+                }`}
               aria-label="Toggle pricing period"
             >
               <motion.div
@@ -94,13 +93,12 @@ export default function Pricing() {
             <motion.div
               key={i}
               variants={fadeInUp}
-              className={`relative rounded-xl transition-all duration-300 ${
-                tier.highlighted
+              className={`relative rounded-xl transition-all duration-300 ${tier.highlighted
                   ? "bg-navy text-white shadow-xl ring-1 ring-teal/30 lg:scale-[1.03]"
                   : tier.ghost
-                  ? "bg-warm-white border border-dashed border-navy/15"
-                  : "bg-white border border-card-border card-hover"
-              }`}
+                    ? "bg-warm-white border border-dashed border-navy/15"
+                    : "bg-white border border-card-border card-hover"
+                }`}
             >
               {/* Badge */}
               {tier.badge && (
@@ -149,11 +147,10 @@ export default function Pricing() {
                       ) : (
                         <X className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${tier.highlighted ? "text-white/20" : "text-border"}`} />
                       )}
-                      <span className={`text-[13px] leading-snug ${
-                        feature.included
+                      <span className={`text-[13px] leading-snug ${feature.included
                           ? tier.highlighted ? "text-white/80" : "text-navy/80"
                           : tier.highlighted ? "text-white/20" : "text-muted-light"
-                      }`}>
+                        }`}>
                         {feature.text}
                       </span>
                     </li>
@@ -163,13 +160,12 @@ export default function Pricing() {
                 {/* CTA */}
                 <button
                   onClick={() => handleScroll("#contact")}
-                  className={`w-full group inline-flex items-center justify-center gap-2 py-3 rounded-lg font-semibold text-sm transition-all duration-300 cursor-pointer ${
-                    tier.highlighted
+                  className={`w-full group inline-flex items-center justify-center gap-2 py-3 rounded-lg font-semibold text-sm transition-all duration-300 cursor-pointer ${tier.highlighted
                       ? "bg-teal hover:bg-teal-light text-white hover:shadow-lg"
                       : tier.ghost
-                      ? "bg-navy text-white hover:bg-navy-light hover:shadow-lg"
-                      : "bg-navy/[0.03] text-navy hover:bg-navy hover:text-white"
-                  }`}
+                        ? "bg-navy text-white hover:bg-navy-light hover:shadow-lg"
+                        : "bg-navy/[0.03] text-navy hover:bg-navy hover:text-white"
+                    }`}
                 >
                   {tier.cta}
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
