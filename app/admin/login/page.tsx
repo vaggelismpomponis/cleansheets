@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { useActionState } from 'react';
 import { loginAction } from '@/app/actions/auth';
-import { Eye, EyeOff, Loader2, Lock, Mail, AlertCircle, ShieldCheck } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Lock, Mail, AlertCircle, ShieldCheck, ArrowLeft, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 type LoginState = { error?: string } | undefined;
 
@@ -21,6 +22,17 @@ export default function AdminLoginPage() {
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="w-full max-w-md"
       >
+        {/* Go to Website Button top */}
+        <div className="mb-4 flex items-center justify-between">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-teal transition-all bg-white border border-slate-200 hover:border-teal/30 px-3.5 py-2 rounded-xl shadow-sm cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-slate-400 group-hover:text-teal" />
+            Επιστροφή στην Ιστοσελίδα
+          </Link>
+        </div>
+
         {/* Card */}
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           {/* Card top accent */}
@@ -128,6 +140,14 @@ export default function AdminLoginPage() {
                   'Είσοδος στον Πίνακα Ελέγχου'
                 )}
               </button>
+
+              <Link
+                href="/"
+                className="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer mt-3"
+              >
+                <Globe className="w-3.5 h-3.5 text-slate-400" />
+                Μετάβαση στην Ιστοσελίδα
+              </Link>
             </form>
           </div>
         </div>
