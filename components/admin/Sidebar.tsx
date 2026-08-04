@@ -18,6 +18,7 @@ import {
   Layers,
   ExternalLink,
   X,
+  History,
 } from 'lucide-react';
 import { LogoIcon } from '@/components/Logo';
 
@@ -34,14 +35,23 @@ const navItems = [
   { href: '/admin/users', label: 'Χρήστες', icon: UserPlus },
 ];
 
+/** Super-admin-only nav item */
+const superAdminNavItem = {
+  href: '/admin/history',
+  label: 'Ιστορικό',
+  icon: History,
+};
+
 interface SidebarProps {
   /** Mobile drawer open state (controlled by AdminShell) */
   mobileOpen?: boolean;
   /** Called when the mobile drawer should close */
   onClose?: () => void;
+  /** Whether the current user is the super-admin (ebomponis@gmail.com) */
+  isSuperAdmin?: boolean;
 }
 
-export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
+export function Sidebar({ mobileOpen = false, onClose, isSuperAdmin = false }: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
 
@@ -120,6 +130,47 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
             </Link>
           );
         })}
+
+        {/* Super-admin only: History */}
+        {isSuperAdmin && (() => {
+          const item = superAdminNavItem;
+          const active = isActive(item.href);
+          const Icon = item.icon;
+          return (
+            <>
+              {/* Divider */}
+              <div className="my-2 border-t border-slate-100" />
+              <Link
+                key={item.href}
+                href={item.href}
+                title={!showLabels ? item.label : undefined}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${
+                  active
+                    ? 'bg-teal/10 text-teal border border-teal/25'
+                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+                }`}
+              >
+                <Icon
+                  className={`shrink-0 ${active ? 'text-teal' : 'text-slate-400 group-hover:text-slate-600'}`}
+                  style={{ width: '18px', height: '18px' }}
+                />
+                <AnimatePresence>
+                  {showLabels && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                      className="whitespace-nowrap"
+                    >
+                      {item.label}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </Link>
+            </>
+          );
+        })()}
       </nav>
 
       {/* Preview site link */}

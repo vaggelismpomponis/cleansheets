@@ -7,6 +7,8 @@ import { Sidebar } from '@/components/admin/Sidebar';
 import { TopBar } from '@/components/admin/TopBar';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
 
+const SUPER_ADMIN_EMAIL = 'ebomponis@gmail.com';
+
 interface AdminShellProps {
   user: SupabaseUser;
   children: React.ReactNode;
@@ -15,6 +17,7 @@ interface AdminShellProps {
 export function AdminShell({ user, children }: AdminShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const isSuperAdmin = user.email === SUPER_ADMIN_EMAIL;
 
   // Close mobile drawer on route change
   useEffect(() => {
@@ -48,7 +51,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
       </AnimatePresence>
 
       {/* Sidebar */}
-      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} isSuperAdmin={isSuperAdmin} />
 
       {/* Main content */}
       <div className="flex flex-col flex-1 overflow-hidden min-w-0 w-full">
