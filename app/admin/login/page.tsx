@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center mb-4 shadow-lg shadow-teal/20">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/><path d="M20 6l-2 12H6L4 6"/>
+                  <path d="M3 6h18" /><path d="M3 12h18" /><path d="M3 18h18" /><path d="M20 6l-2 12H6L4 6" />
                 </svg>
               </div>
               <h1 className="text-xl font-bold text-slate-800 font-heading tracking-tight">Ephtopia Cleans</h1>
@@ -140,14 +140,6 @@ export default function AdminLoginPage() {
                   'Είσοδος στον Πίνακα Ελέγχου'
                 )}
               </button>
-
-              <Link
-                href="/"
-                className="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer mt-3"
-              >
-                <Globe className="w-3.5 h-3.5 text-slate-400" />
-                Μετάβαση στην Ιστοσελίδα
-              </Link>
             </form>
           </div>
         </div>
