@@ -73,7 +73,8 @@ export async function inviteUserAction(
 
   const adminClient = createAdminClient();
   const { error } = await adminClient.auth.admin.inviteUserByEmail(email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'}/admin/invite`,
+    // Use the explicit redirect base — must be whitelisted in Supabase → Auth → URL Configuration
+    redirectTo: `${process.env.SUPABASE_REDIRECT_URL ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'}/admin/invite`,
   });
 
   if (error) {
