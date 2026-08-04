@@ -19,6 +19,11 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Allow the invite acceptance page through (user has no session yet)
+  if (pathname.startsWith('/admin/invite')) {
+    return NextResponse.next();
+  }
+
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(

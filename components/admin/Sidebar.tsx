@@ -12,6 +12,7 @@ import {
   Tag,
   Mail,
   Users,
+  UserPlus,
   ChevronLeft,
   ChevronRight,
   Layers,
@@ -30,6 +31,7 @@ const navItems = [
   { href: '/admin/faq', label: 'FAQ', icon: HelpCircle },
   { href: '/admin/lead-form', label: 'Φόρμα', icon: Mail },
   { href: '/admin/footer', label: 'Footer', icon: Layers },
+  { href: '/admin/users', label: 'Χρήστες', icon: UserPlus },
 ];
 
 interface SidebarProps {
