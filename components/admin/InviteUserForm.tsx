@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { inviteUserAction, deleteUserAction } from '@/app/actions/auth';
 import { useRouter } from 'next/navigation';
+import { ConfirmModal } from '@/components/admin/ConfirmModal';
 
 type InviteState = { error?: string; success?: string } | undefined;
 
@@ -75,16 +76,11 @@ function UserStatusBadge({ user }: { user: UserRow }) {
 function DeleteUserButton({ userId, email }: { userId: string; email: string }) {
   const [isPending, startTransition] = useTransition();
   const [deleteError, setDeleteError] = React.useState<string | null>(null);
+  const [modalOpen, setModalOpen] = React.useState(false);
   const router = useRouter();
 
-  const handleDelete = () => {
-    if (
-      !confirm(
-        `Είσαι σίγουρος ότι θέλεις να διαγράψεις τον χρήστη "${email}"; Αυτή η ενέργεια είναι μη αναστρέψιμη.`
-      )
-    )
-      return;
-
+  const handleConfirm = () => {
+    setModalOpen(false);
     startTransition(async () => {
       const result = await deleteUserAction(userId);
       if (result.error) {
@@ -99,7 +95,7 @@ function DeleteUserButton({ userId, email }: { userId: string; email: string }) 
     <div>
       {deleteError && <p className="text-red-500 text-[10px] mb-1">{deleteError}</p>}
       <button
-        onClick={handleDelete}
+        onClick={() => setModalOpen(true)}
         disabled={isPending}
         className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 border border-transparent hover:border-red-200 transition-all disabled:opacity-50 cursor-pointer"
         title="Διαγραφή χρήστη"
@@ -110,6 +106,18 @@ function DeleteUserButton({ userId, email }: { userId: string; email: string }) 
           <Trash2 className="w-3.5 h-3.5" />
         )}
       </button>
+
+      <ConfirmModal
+        open={modalOpen}
+        title="Διαγραφή χρήστη"
+        description={`Αυτή η ενέργεια είναι μη αναστρέψιμη. Ο λογαριασμός του χρήστη θα διαγραφεί μόνιμα και δεν θα μπορεί να συνδεθεί ξανά.`}
+        confirmLabel="Διαγραφή"
+        cancelLabel="Άκυρο"
+        requiredConfirmText={email}
+        onConfirm={handleConfirm}
+        onCancel={() => setModalOpen(false)}
+        variant="danger"
+      />
     </div>
   );
 }
