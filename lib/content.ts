@@ -200,7 +200,7 @@ export const siteContent = {
         links: [
           { label: "Όροι Χρήσης", href: "#" },
           { label: "Πολιτική Απορρήτου", href: "#" },
-          { label: "Πολιτική Αποζημίωσης", href: "#" },
+          { label: "Πολιτική Αποζημίωσης", href: "#" }
         ],
       },
     },

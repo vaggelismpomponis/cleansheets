@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
@@ -90,9 +90,15 @@ export default function Footer({ siteContent }: FooterProps) {
             <ul className="space-y-2.5">
               {siteContent.footer.columns.legal.links.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className="text-sm text-white hover:text-teal-light transition-colors">
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("#") ? (
+                    <a href={link.href} className="text-sm text-white hover:text-teal-light transition-colors">
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link href={link.href} className="text-sm text-white hover:text-teal-light transition-colors">
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -128,9 +134,17 @@ export default function Footer({ siteContent }: FooterProps) {
 
         {/* Bottom bar */}
         <div className="mt-14 pt-8 border-t border-zinc-700 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[11px] text-white" suppressHydrationWarning>
-            {siteContent.brand.copyright}
-          </p>
+          <div className="flex items-center gap-3 text-[11px] text-white">
+            <span suppressHydrationWarning>{siteContent.brand.copyright}</span>
+            <span className="text-zinc-600">•</span>
+            <Link
+              href="/admin"
+              className="text-zinc-400 hover:text-teal-light transition-colors flex items-center gap-1"
+            >
+              <LayoutDashboard className="w-3 h-3" />
+              <span>Admin Dashboard</span>
+            </Link>
+          </div>
           <p className="text-[11px] text-white">
             Σχεδιάσμος &amp; Υλοποίηση:{" "}
             <a
