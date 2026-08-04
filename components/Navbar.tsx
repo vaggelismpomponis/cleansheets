@@ -6,6 +6,7 @@ import { Menu, ChevronDown, SprayCan, Building2, Layers } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { SiteContent } from "@/lib/get-content";
+import Logo from "@/components/Logo";
 import {
   Sheet,
   SheetContent,
@@ -85,7 +86,7 @@ export default function Navbar({ siteContent }: NavbarProps) {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 group cursor-pointer"
+            className="flex items-center group cursor-pointer"
             onClick={() => {
               setIsOpen(false);
               if (pathname === "/") {
@@ -93,13 +94,11 @@ export default function Navbar({ siteContent }: NavbarProps) {
               }
             }}
           >
-            <span
-              className={`text-lg font-bold font-heading tracking-tight transition-colors ${
-                isScrolled ? "text-navy" : "text-slate-800"
-              }`}
-            >
-              {siteContent.brand.name}
-            </span>
+            <Logo
+              brandName={siteContent.brand.name}
+              size="md"
+              theme="light"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -231,7 +230,10 @@ export default function Navbar({ siteContent }: NavbarProps) {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[350px] p-0 flex flex-col border-border/50 bg-white/95 backdrop-blur-xl">
               <SheetTitle className="sr-only">Μενού Πλοήγησης</SheetTitle>
-              <div className="flex flex-col pt-20 px-6 gap-2">
+              <div className="flex flex-col pt-12 px-6 gap-2">
+                <div className="pb-6 border-b border-border/60">
+                  <Logo brandName={siteContent.brand.name} size="sm" theme="light" />
+                </div>
                 {siteContent.nav.links.map((link, i) => {
                   if (link.href === "/services") {
                     return (

@@ -52,9 +52,11 @@ export function TopBar({ user, sectionTitle, onMenuClick }: TopBarProps) {
         <button
           onClick={handleLogout}
           disabled={isPending}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-slate-500 hover:text-slate-800 hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all text-xs font-medium disabled:opacity-50 cursor-pointer shrink-0"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 hover:border-rose-300 transition-all text-xs font-semibold disabled:opacity-50 cursor-pointer shrink-0 shadow-xs"
+          title="Αποσύνδεση"
+          aria-label="Αποσύνδεση"
         >
-          <LogOut className="w-3.5 h-3.5" />
+          <LogOut className="w-3.5 h-3.5 text-rose-600" />
           <span className="hidden sm:inline">{isPending ? 'Αποσύνδεση...' : 'Αποσύνδεση'}</span>
         </button>
       </div>

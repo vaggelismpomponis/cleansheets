@@ -5,6 +5,7 @@ import { Mail, Phone, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import Logo from "@/components/Logo";
 
 interface FooterProps {
   siteContent: SiteContent;
@@ -26,20 +27,14 @@ export default function Footer({ siteContent }: FooterProps) {
         >
           {/* Brand Column */}
           <motion.div variants={fadeInUp} className="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-1">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-7 h-7 rounded-md bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 6h18"/>
-                  <path d="M3 12h18"/>
-                  <path d="M3 18h18"/>
-                  <path d="M20 6l-2 12H6L4 6"/>
-                </svg>
-              </div>
-              <span className="text-base font-bold text-white font-heading tracking-tight">
-                {siteContent.brand.name}
-              </span>
+            <div className="mb-4">
+              <Logo
+                brandName={siteContent.brand.name}
+                theme="dark"
+                size="md"
+              />
             </div>
-            <p className="text-sm leading-relaxed max-w-xs text-white">
+            <p className="text-sm leading-relaxed max-w-xs text-slate-300">
               {siteContent.footer.description}
             </p>
           </motion.div>

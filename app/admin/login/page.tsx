@@ -6,6 +6,7 @@ import { loginAction } from '@/app/actions/auth';
 import { Eye, EyeOff, Loader2, Lock, Mail, AlertCircle, ShieldCheck, ArrowLeft, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 type LoginState = { error?: string } | undefined;
 
@@ -44,15 +45,14 @@ export default function AdminLoginPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1, duration: 0.4 }}
-              className="flex flex-col items-center mb-8"
+              className="flex flex-col items-center mb-8 text-center"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center mb-4 shadow-lg shadow-teal/20">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 6h18" /><path d="M3 12h18" /><path d="M3 18h18" /><path d="M20 6l-2 12H6L4 6" />
-                </svg>
-              </div>
-              <h1 className="text-xl font-bold text-slate-800 font-heading tracking-tight">Ephtopia Cleans</h1>
-              <p className="text-slate-400 text-sm mt-1">Σύστημα Διαχείρισης Περιεχομένου</p>
+              <Logo
+                size="lg"
+                showSubtitle={true}
+                subtitle="Σύστημα Διαχείρισης Περιεχομένου"
+                className="flex-col !gap-3 text-center"
+              />
             </motion.div>
 
             {/* Admin-only notice */}

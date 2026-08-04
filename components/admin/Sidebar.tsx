@@ -18,6 +18,7 @@ import {
   ExternalLink,
   X,
 } from 'lucide-react';
+import { LogoIcon } from '@/components/Logo';
 
 const navItems = [
   { href: '/admin', label: 'Αρχική', icon: LayoutDashboard, exact: true },
@@ -51,11 +52,7 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
     <>
       {/* Logo */}
       <div className="flex items-center gap-3 px-4 py-5 border-b border-slate-200 min-h-[72px] overflow-hidden">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal to-teal-dark flex items-center justify-center shrink-0">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/><path d="M20 6l-2 12H6L4 6"/>
-          </svg>
-        </div>
+        <LogoIcon size="sm" />
         <AnimatePresence>
           {showLabels && (
             <motion.div
@@ -64,7 +61,10 @@ export function Sidebar({ mobileOpen = false, onClose }: SidebarProps) {
               exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="text-sm font-bold text-slate-800 font-heading leading-tight">Ephtopia</div>
+              <div className="text-sm font-bold text-slate-800 font-heading leading-tight flex items-center gap-1">
+                <span>Ephtopia</span>
+                <span className="text-teal font-extrabold">Cleans</span>
+              </div>
               <div className="text-[10px] text-slate-400 font-medium">Πίνακας Διαχείρισης</div>
             </motion.div>
           )}

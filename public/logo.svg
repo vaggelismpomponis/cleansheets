@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="full-ephtopia-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <!-- Top Highlight -->
+    <linearGradient id="full-ephtopia-shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Sparkle Gradient -->
+    <linearGradient id="full-ephtopia-sparkle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#E6FFFA" />
+      <stop offset="100%" stop-color="#FCD34D" />
+    </linearGradient>
+
+    <filter id="full-sparkle-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Logo Mark (Left) -->
+  <g transform="translate(10, 10)">
+    <!-- Base Icon Container (70x70) -->
+    <rect x="0" y="0" width="70" height="70" rx="18" fill="url(#full-ephtopia-bg)" />
+    <rect x="0.5" y="0.5" width="69" height="69" rx="17.5" stroke="url(#full-ephtopia-shine)" stroke-width="1" fill="none" />
+
+    <!-- Wave 1 -->
+    <path d="M20 25 C 20 22, 25 20, 33 20 C 42 20, 48 23, 51 25.5 C 52 26.5, 51 28, 49.5 27.5 C 45 26.5, 38 26.2, 32 27.5 C 27 28.5, 23 30, 20 32 Z" fill="#FFFFFF" fill-opacity="0.95" />
+
+    <!-- Spine & Wave 2 -->
+    <path d="M19 22 C 19.5 22, 20 22.5, 20 24 L 20 50 C 20 51.5, 19 52, 18 51.5 C 17.5 51, 17 50, 17 49 L 17 23.5 C 17 22.5, 18 22, 19 22 Z" fill="#FFFFFF" fill-opacity="0.9" />
+    <path d="M20 36 C 25 35, 31 34.5, 38 35.5 C 41 36, 43 36.8, 44 37.8 C 44.5 38.5, 44 39.5, 42.5 39.5 C 37 39.2, 30 40, 20 42.5 Z" fill="#FFFFFF" fill-opacity="0.85" />
+
+    <!-- Wave 3 -->
+    <path d="M20 47 C 25 45.8, 34 45.5, 41 47 C 46 48, 50 50.5, 53 52.8 C 54 53.6, 53 55, 51.5 54.6 C 45 53.3, 36 52.5, 29 53.8 C 24.5 54.6, 21.5 56, 19 58 C 18 58.8, 17 58, 17.3 56.8 C 18.2 53, 19 50, 20 47 Z" fill="#FFFFFF" />
+
+    <!-- Sparkle Star -->
+    <g transform="translate(54, 20)" filter="url(#full-sparkle-glow)">
+      <path d="M0 -9 C 0.5 -2.5, 2.5 -0.5, 9 0 C 2.5 0.5, 0.5 2.5, 0 9 C -0.5 2.5, -2.5 0.5, -9 0 C -2.5 -0.5, -0.5 -2.5, 0 -9 Z" fill="url(#full-ephtopia-sparkle)" />
+      <circle cx="0" cy="0" r="1.5" fill="#FFFFFF" />
+    </g>
+  </g>
+
+  <!-- Typography / Brand Name -->
+  <g transform="translate(96, 0)">
+    <!-- EPHTOPIA -->
+    <text x="0" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5" fill="#0C1926">
+      Ephtopia
+    </text>
+    
+    <!-- CLEANS (in Teal) -->
+    <text x="132" y="46" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" letter-spacing="-0.3" fill="#10B981">
+      Cleans
+    </text>
+
+    <!-- Sparkle Dot -->
+    <circle cx="236" cy="38" r="3.5" fill="#10B981" />
+    <circle cx="236" cy="38" r="1.5" fill="#FCD34D" />
+
+    <!-- Tagline / Subtitle -->
+    <text x="1" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="600" letter-spacing="1.8" text-transform="uppercase" fill="#8A94A1">
+      HOSPITALITY &amp; CLEANING SERVICES
+    </text>
+  </g>
+</svg>
