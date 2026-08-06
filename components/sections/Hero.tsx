@@ -22,7 +22,7 @@ export default function Hero({ siteContent }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-slate-100"
+      className="relative min-h-svh flex items-center overflow-hidden bg-slate-100"
     >
       {/* Background Image — visible but light */}
       <div className="absolute inset-0">
@@ -45,7 +45,7 @@ export default function Hero({ siteContent }: HeroProps) {
       {/* Animated gradient accent line at bottom */}
       <div className="absolute bottom-0 left-0 right-0 animated-gradient-line" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 md:pt-36 pb-20">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-28 lg:pt-36 pb-12 md:pb-16 lg:pb-20">
         <div className="max-w-3xl">
           <motion.div
             variants={staggerContainer}
@@ -63,7 +63,7 @@ export default function Hero({ siteContent }: HeroProps) {
             {/* Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-800 leading-[1.08] tracking-tight"
+              className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-extrabold text-slate-800 leading-[1.08] tracking-tight"
             >
               {siteContent.hero.headline}
               <br />
@@ -75,7 +75,7 @@ export default function Hero({ siteContent }: HeroProps) {
             {/* Subheadline */}
             <motion.p
               variants={fadeInUp}
-              className="mt-7 text-lg sm:text-xl text-slate-500 max-w-xl leading-relaxed font-light"
+              className="mt-4 md:mt-5 lg:mt-7 text-base sm:text-lg md:text-base lg:text-xl text-slate-500 max-w-xl leading-relaxed font-light"
             >
               {siteContent.hero.subheadline}
             </motion.p>
@@ -83,7 +83,7 @@ export default function Hero({ siteContent }: HeroProps) {
             {/* CTAs */}
             <motion.div
               variants={fadeInUp}
-              className="mt-10 flex flex-col sm:flex-row gap-4"
+              className="mt-6 md:mt-7 lg:mt-10 flex flex-col sm:flex-row gap-4"
             >
               <Button
                 onClick={() => handleScroll("#contact")}
@@ -104,7 +104,7 @@ export default function Hero({ siteContent }: HeroProps) {
             {/* Trust Stats */}
             <motion.div
               variants={fadeInUp}
-              className="mt-16"
+              className="mt-8 md:mt-10 lg:mt-16 flex justify-center sm:block"
             >
               <Card className="bg-white border-slate-200 shadow-md inline-flex p-1">
                 <CardContent className="flex items-center justify-center gap-8 p-4 sm:px-8 sm:py-5">
