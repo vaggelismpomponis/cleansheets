@@ -24,19 +24,29 @@ import {
 } from 'lucide-react';
 import { LogoIcon } from '@/components/Logo';
 
-const navItems = [
-  { href: '/admin', label: 'Αρχική', icon: LayoutDashboard, exact: true },
-  { href: '/admin/hero', label: 'Hero', icon: Star },
-  { href: '/admin/problem', label: 'Πρόβλημα', icon: Layers },
-  { href: '/admin/services', label: 'Υπηρεσίες', icon: FileText },
-  { href: '/admin/testimonials', label: 'Αξιολογήσεις', icon: Users },
-  { href: '/admin/pricing', label: 'Τιμολόγηση', icon: Tag },
-  { href: '/admin/faq', label: 'FAQ', icon: HelpCircle },
-  { href: '/admin/lead-form', label: 'Φόρμα', icon: Mail },
-  { href: '/admin/footer', label: 'Footer', icon: Layers },
-  { href: '/admin/jobs', label: 'Αγγελίες', icon: Briefcase },
-  { href: '/admin/applications', label: 'Αιτήσεις CV', icon: UserCheck },
-  { href: '/admin/users', label: 'Χρήστες', icon: UserPlus },
+const navGroups = [
+  {
+    label: 'Περιεχόμενο',
+    items: [
+      { href: '/admin', label: 'Αρχική', icon: LayoutDashboard, exact: true },
+      { href: '/admin/hero', label: 'Hero', icon: Star },
+      { href: '/admin/problem', label: 'Πρόβλημα', icon: Layers },
+      { href: '/admin/services', label: 'Υπηρεσίες', icon: FileText },
+      { href: '/admin/testimonials', label: 'Αξιολογήσεις', icon: Users },
+      { href: '/admin/pricing', label: 'Τιμολόγηση', icon: Tag },
+      { href: '/admin/faq', label: 'FAQ', icon: HelpCircle },
+      { href: '/admin/lead-form', label: 'Φόρμα', icon: Mail },
+      { href: '/admin/footer', label: 'Footer', icon: Layers },
+    ],
+  },
+  {
+    label: 'Λειτουργίες',
+    items: [
+      { href: '/admin/jobs', label: 'Αγγελίες', icon: Briefcase },
+      { href: '/admin/applications', label: 'Αιτήσεις CV', icon: UserCheck },
+      { href: '/admin/users', label: 'Χρήστες', icon: UserPlus },
+    ],
+  },
 ];
 
 /** Super-admin-only nav item */
@@ -99,82 +109,102 @@ export function Sidebar({ mobileOpen = false, onClose, isSuperAdmin = false }: S
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-2 py-4 space-y-0.5 overflow-y-auto">
-        {navItems.map((item) => {
-          const active = isActive(item.href, item.exact);
-          const Icon = item.icon;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              title={!showLabels ? item.label : undefined}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${
-                active
-                  ? 'bg-teal/10 text-teal border border-teal/25'
-                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
-              }`}
-            >
-              <Icon
-                className={`shrink-0 ${active ? 'text-teal' : 'text-slate-400 group-hover:text-slate-600'}`}
-                style={{ width: '18px', height: '18px' }}
-              />
-              <AnimatePresence>
-                {showLabels && (
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                    className="whitespace-nowrap"
-                  >
-                    {item.label}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </Link>
-          );
-        })}
-
-        {/* Super-admin only: History */}
-        {isSuperAdmin && (() => {
-          const item = superAdminNavItem;
-          const active = isActive(item.href);
-          const Icon = item.icon;
-          return (
-            <>
-              {/* Divider */}
-              <div className="my-2 border-t border-slate-100" />
-              <Link
-                key={item.href}
-                href={item.href}
-                title={!showLabels ? item.label : undefined}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${
-                  active
-                    ? 'bg-teal/10 text-teal border border-teal/25'
-                    : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
-                }`}
-              >
-                <Icon
-                  className={`shrink-0 ${active ? 'text-teal' : 'text-slate-400 group-hover:text-slate-600'}`}
-                  style={{ width: '18px', height: '18px' }}
-                />
-                <AnimatePresence>
-                  {showLabels && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className="whitespace-nowrap"
+      <nav className="flex-1 px-2 py-4 overflow-y-auto">
+        <div className="space-y-6">
+          {navGroups.map((group, idx) => (
+            <div key={group.label}>
+              {showLabels ? (
+                <div className="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                  {group.label}
+                </div>
+              ) : (
+                idx > 0 && <div className="mx-3 mb-2 border-t border-slate-100" />
+              )}
+              <div className="space-y-0.5">
+                {group.items.map((item) => {
+                  const active = isActive(item.href, item.exact);
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      title={!showLabels ? item.label : undefined}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${
+                        active
+                          ? 'bg-teal/10 text-teal border border-teal/25'
+                          : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+                      }`}
                     >
-                      {item.label}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </Link>
-            </>
-          );
-        })()}
+                      <Icon
+                        className={`shrink-0 ${active ? 'text-teal' : 'text-slate-400 group-hover:text-slate-600'}`}
+                        style={{ width: '18px', height: '18px' }}
+                      />
+                      <AnimatePresence>
+                        {showLabels && (
+                          <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="whitespace-nowrap"
+                          >
+                            {item.label}
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+
+          {/* Super-admin only: History */}
+          {isSuperAdmin && (() => {
+            const item = superAdminNavItem;
+            const active = isActive(item.href);
+            const Icon = item.icon;
+            return (
+              <div>
+                {showLabels ? (
+                  <div className="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                    Σύστημα
+                  </div>
+                ) : (
+                  <div className="mx-3 mb-2 border-t border-slate-100" />
+                )}
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  title={!showLabels ? item.label : undefined}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${
+                    active
+                      ? 'bg-teal/10 text-teal border border-teal/25'
+                      : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100'
+                  }`}
+                >
+                  <Icon
+                    className={`shrink-0 ${active ? 'text-teal' : 'text-slate-400 group-hover:text-slate-600'}`}
+                    style={{ width: '18px', height: '18px' }}
+                  />
+                  <AnimatePresence>
+                    {showLabels && (
+                      <motion.span
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                        className="whitespace-nowrap"
+                      >
+                        {item.label}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </Link>
+              </div>
+            );
+          })()}
+        </div>
       </nav>
 
       {/* Preview site link */}
