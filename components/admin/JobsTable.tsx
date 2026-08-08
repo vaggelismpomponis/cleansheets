@@ -106,7 +106,7 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <Link
-                    href={`/admin/jobs/${job.id}/applications`}
+                    href={`/admin/applications?job=${job.id}`}
                     className="font-bold text-slate-800 text-base hover:text-teal transition-colors block"
                   >
                     {job.title}
@@ -161,7 +161,7 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
               {/* Card Footer: Applications button + Actions */}
               <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                 <Link
-                  href={`/admin/jobs/${job.id}/applications`}
+                  href={`/admin/applications?job=${job.id}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-lg bg-teal/10 text-teal hover:bg-teal hover:text-white border border-teal/20 transition-all shadow-sm"
                 >
                   <Users className="w-3.5 h-3.5" />
@@ -216,7 +216,7 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
                   >
                     <td className="py-4 px-5">
                       <Link
-                        href={`/admin/jobs/${job.id}/applications`}
+                        href={`/admin/applications?job=${job.id}`}
                         className="font-bold text-slate-800 text-sm hover:text-teal transition-colors block"
                         title="Προβολή αιτήσεων"
                       >
@@ -248,7 +248,7 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
 
                     <td className="py-4 px-4 text-center whitespace-nowrap">
                       <Link
-                        href={`/admin/jobs/${job.id}/applications`}
+                        href={`/admin/applications?job=${job.id}`}
                         className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-lg bg-teal/10 text-teal hover:bg-teal hover:text-white border border-teal/20 transition-all shadow-sm"
                         title="Προβολή Αιτήσεων"
                       >

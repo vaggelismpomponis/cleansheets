@@ -257,20 +257,31 @@ function greekToLatin(text: string): string {
     .replace(/[^a-zA-Z0-9_]/g, '');
 }
 
-export async function getApplications(jobId: string): Promise<JobApplication[]> {
+export async function getApplications(jobId?: string): Promise<JobApplication[]> {
   await requireAdmin();
   const adminClient = createAdminClient();
-  const { data, error } = await adminClient
+
+  let query = adminClient
     .from('job_applications')
-    .select('*')
-    .eq('job_id', jobId)
+    .select('*, jobs(title)')
     .order('submitted_at', { ascending: false });
+
+  if (jobId && jobId !== 'all') {
+    query = query.eq('job_id', jobId);
+  }
+
+  const { data, error } = await query;
 
   if (error || !data) return [];
 
   // Generate signed URLs for CV downloads (valid for 1 hour)
   const applications = await Promise.all(
-    data.map(async (app: JobApplication) => {
+    data.map(async (row: any) => {
+      const app: JobApplication = {
+        ...row,
+        job_title: row.jobs?.title,
+      };
+
       if (!app.cv_url) return app;
 
       // If it's already a full HTTP URL (legacy) or path

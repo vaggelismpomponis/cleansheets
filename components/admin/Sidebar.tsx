@@ -20,6 +20,7 @@ import {
   X,
   History,
   Briefcase,
+  UserCheck,
 } from 'lucide-react';
 import { LogoIcon } from '@/components/Logo';
 
@@ -34,6 +35,7 @@ const navItems = [
   { href: '/admin/lead-form', label: 'Φόρμα', icon: Mail },
   { href: '/admin/footer', label: 'Footer', icon: Layers },
   { href: '/admin/jobs', label: 'Αγγελίες', icon: Briefcase },
+  { href: '/admin/applications', label: 'Αιτήσεις CV', icon: UserCheck },
   { href: '/admin/users', label: 'Χρήστες', icon: UserPlus },
 ];
 

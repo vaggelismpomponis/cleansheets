@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { JobApplication, ApplicationStatus, STATUS_LABELS } from '@/lib/types/jobs';
+import { Job, JobApplication, ApplicationStatus, STATUS_LABELS } from '@/lib/types/jobs';
 import { updateApplicationStatus } from '@/app/actions/jobs';
 import {
   CalendarDays,
@@ -22,6 +22,8 @@ import {
 
 interface ApplicationsListProps {
   initialApplications: JobApplication[];
+  jobs?: Job[];
+  selectedJobId?: string;
 }
 
 function formatDate(dateStr: string) {
@@ -196,7 +198,14 @@ export default function ApplicationsList({ initialApplications }: ApplicationsLi
                       </span>
                     </div>
                     <div>
-                      <div className="font-bold text-slate-800 text-sm">{app.full_name}</div>
+                      <div className="font-bold text-slate-800 text-sm flex items-center flex-wrap gap-2">
+                        <span>{app.full_name}</span>
+                        {app.job_title && (
+                          <span className="text-[11px] font-semibold text-teal bg-teal/10 px-2 py-0.5 rounded-md border border-teal/20">
+                            {app.job_title}
+                          </span>
+                        )}
+                      </div>
                       <div className="text-xs text-slate-400">Αίτηση #{i + 1}</div>
                     </div>
                   </div>

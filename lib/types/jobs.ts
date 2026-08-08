@@ -22,6 +22,7 @@ export interface Job {
 export interface JobApplication {
   id: string;
   job_id: string;
+  job_title?: string;
   full_name: string;
   email: string;
   phone: string;
