@@ -13,9 +13,6 @@ const LivePreviewContext = createContext<LivePreviewContextType | null>(null);
 
 export function useLivePreview() {
   const context = useContext(LivePreviewContext);
-  if (!context) {
-    throw new Error('useLivePreview must be used within a LivePreviewProvider');
-  }
   return context;
 }
 

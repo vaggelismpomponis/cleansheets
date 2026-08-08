@@ -11,8 +11,8 @@ interface TestimonialsProps {
 }
 
 export default function Testimonials({ siteContent: initialContent }: TestimonialsProps) {
-  const { siteContent } = useLivePreview();
-  const content = (siteContent || initialContent).testimonials;
+  const preview = useLivePreview();
+  const content = (preview?.siteContent || initialContent).testimonials;
 
   return (
     <section id="testimonials" className="relative py-20 md:py-28 overflow-hidden bg-slate-50">

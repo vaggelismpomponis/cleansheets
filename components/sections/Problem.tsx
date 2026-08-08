@@ -18,7 +18,8 @@ interface ProblemProps {
 }
 
 export default function Problem({ siteContent: initialContent }: ProblemProps) {
-  const { siteContent } = useLivePreview();
+  const preview = useLivePreview();
+  const siteContent = preview?.siteContent || initialContent;
 
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);

@@ -13,7 +13,8 @@ interface FooterProps {
 }
 
 export default function Footer({ siteContent: initialContent }: FooterProps) {
-  const { siteContent } = useLivePreview();
+  const preview = useLivePreview();
+  const siteContent = preview?.siteContent || initialContent;
   return (
     <footer className="bg-[#27272A] text-slate-400 relative overflow-hidden">
       {/* Top accent line */}

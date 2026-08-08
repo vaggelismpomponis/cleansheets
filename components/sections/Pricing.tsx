@@ -8,7 +8,9 @@ import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
-  const { siteContent, pricingTiers } = useLivePreview();
+  const preview = useLivePreview();
+  if (!preview) return null;
+  const { siteContent, pricingTiers } = preview;
 
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);

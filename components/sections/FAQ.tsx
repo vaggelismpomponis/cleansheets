@@ -17,7 +17,9 @@ interface FAQProps {
 }
 
 export default function FAQ({ siteContent: initialContent, faqItems: initialFaq }: FAQProps) {
-  const { siteContent, faqItems } = useLivePreview();
+  const preview = useLivePreview();
+  const siteContent = preview?.siteContent || initialContent;
+  const faqItems = preview?.faqItems || initialFaq;
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

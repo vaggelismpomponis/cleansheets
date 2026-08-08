@@ -26,7 +26,8 @@ interface LeadFormProps {
 }
 
 export default function LeadForm({ siteContent: initialContent }: LeadFormProps) {
-  const { siteContent } = useLivePreview();
+  const preview = useLivePreview();
+  const siteContent = preview?.siteContent || initialContent;
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {

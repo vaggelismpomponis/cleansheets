@@ -23,7 +23,8 @@ interface ServicesProps {
 }
 
 export default function Services({ siteContent: initialContent }: ServicesProps) {
-  const { siteContent } = useLivePreview();
+  const preview = useLivePreview();
+  const siteContent = preview?.siteContent || initialContent;
 
   return (
     <section id="services" className="section-padding bg-warm-white relative overflow-hidden">

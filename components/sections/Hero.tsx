@@ -15,7 +15,8 @@ interface HeroProps {
 }
 
 export default function Hero({ siteContent: initialContent }: HeroProps) {
-  const { siteContent } = useLivePreview();
+  const preview = useLivePreview();
+  const siteContent = preview?.siteContent || initialContent;
 
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
