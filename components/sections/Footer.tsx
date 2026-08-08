@@ -34,7 +34,7 @@ export default function Footer({ siteContent }: FooterProps) {
                 size="md"
               />
             </div>
-            <p className="text-sm leading-relaxed max-w-xs text-slate-300">
+            <p className="text-sm leading-relaxed max-w-xs text-white">
               {siteContent.footer.description}
             </p>
           </motion.div>
