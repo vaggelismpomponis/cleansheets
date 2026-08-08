@@ -14,6 +14,7 @@ import {
   EyeOff,
   Plus,
   Loader2,
+  ExternalLink,
 } from 'lucide-react';
 import { toggleJobActive, deleteJob } from '@/app/actions/jobs';
 import { ConfirmModal } from '@/components/admin/ConfirmModal';
@@ -170,6 +171,15 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
 
                 <div className="flex items-center gap-1">
                   <Link
+                    href={`/careers/${job.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Προβολή στο site"
+                    className="p-2 rounded-lg text-slate-400 hover:text-teal hover:bg-teal/10 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </Link>
+                  <Link
                     href={`/admin/jobs/${job.id}`}
                     title="Επεξεργασία"
                     className="p-2 rounded-lg text-slate-400 hover:text-teal hover:bg-teal/10 transition-colors"
@@ -285,6 +295,15 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
                     {/* Actions */}
                     <td className="py-4 px-5 text-right whitespace-nowrap">
                       <div className="flex items-center justify-end gap-1">
+                        <Link
+                          href={`/careers/${job.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Προβολή στο site"
+                          className="p-2 rounded-lg text-slate-400 hover:text-teal hover:bg-teal/10 transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </Link>
                         <Link
                           href={`/admin/jobs/${job.id}/applications`}
                           title="Προβολή Αιτήσεων"
