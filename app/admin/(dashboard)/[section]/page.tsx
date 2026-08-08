@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/auth';
 import { getContent } from '@/lib/get-content';
 import { FieldEditor } from '@/components/admin/FieldEditor';
 import { ArrayEditor } from '@/components/admin/ArrayEditor';
+import { SectionEditorLayout } from '@/components/admin/SectionEditorLayout';
 import { siteContent } from '@/lib/content';
 import { faqItems as defaultFaqItems, pricingTiers as defaultPricingTiers } from '@/lib/constants';
 
@@ -30,7 +31,7 @@ export default async function SectionEditorPage(props: PageProps<'/admin/[sectio
   const { siteContent: content, faqItems, pricingTiers } = await getContent();
 
   return (
-    <div>
+    <SectionEditorLayout>
       {/* Page header */}
       <div className="mb-8">
         <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
@@ -53,7 +54,7 @@ export default async function SectionEditorPage(props: PageProps<'/admin/[sectio
         {section === 'lead-form' && <LeadFormEditor content={content} />}
         {section === 'footer' && <FooterEditor content={content} />}
       </div>
-    </div>
+    </SectionEditorLayout>
   );
 }
 

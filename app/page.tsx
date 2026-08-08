@@ -7,12 +7,13 @@ import LeadForm from "@/components/sections/LeadForm";
 import Footer from "@/components/sections/Footer";
 import CookieNotice from "@/components/CookieNotice";
 import { getContent } from "@/lib/get-content";
+import { LivePreviewProvider } from "@/components/LivePreviewProvider";
 
 export default async function Home() {
   const { siteContent, faqItems, pricingTiers } = await getContent();
 
   return (
-    <>
+    <LivePreviewProvider initialContent={siteContent} initialFaqItems={faqItems} initialPricingTiers={pricingTiers}>
       <Navbar siteContent={siteContent} />
       <main>
         <Hero siteContent={siteContent} />
@@ -23,6 +24,6 @@ export default async function Home() {
       </main>
       <Footer siteContent={siteContent} />
       <CookieNotice />
-    </>
+    </LivePreviewProvider>
   );
 }

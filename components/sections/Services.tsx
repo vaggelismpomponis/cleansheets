@@ -7,6 +7,7 @@ import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 
 const iconMap = {
   Sparkles,
@@ -21,7 +22,9 @@ interface ServicesProps {
   siteContent: SiteContent;
 }
 
-export default function Services({ siteContent }: ServicesProps) {
+export default function Services({ siteContent: initialContent }: ServicesProps) {
+  const { siteContent } = useLivePreview();
+
   return (
     <section id="services" className="section-padding bg-warm-white relative overflow-hidden">
       {/* Top divider */}

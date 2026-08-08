@@ -18,6 +18,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const isSuperAdmin = user.email === SUPER_ADMIN_EMAIL;
+  const isEditorPage = !!pathname.match(/^\/admin\/(hero|problem|services|testimonials|pricing|faq|lead-form|footer)$/);
 
   // Close mobile drawer on route change
   useEffect(() => {
@@ -57,7 +58,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
       <div className="flex flex-col flex-1 overflow-hidden min-w-0 w-full">
         <TopBar user={user} onMenuClick={() => setMobileOpen(true)} />
         <main className="flex-1 overflow-y-auto overflow-x-hidden p-3.5 sm:p-6 lg:p-8">
-          <div className="max-w-4xl mx-auto w-full">
+          <div className={`${isEditorPage ? 'max-w-[1800px]' : 'max-w-4xl'} mx-auto w-full`}>
             {children}
           </div>
         </main>

@@ -48,6 +48,7 @@ export function FieldEditor({
       const result = await saveContent(section, fieldKey, value, 'text');
       if (result.success) {
         setSaveState('saved');
+        window.dispatchEvent(new Event('content-saved'));
         setTimeout(() => setSaveState('idle'), 2500);
       } else {
         setSaveState('error');
@@ -64,6 +65,7 @@ export function FieldEditor({
       const result = await resetContent(section, fieldKey);
       if (result.success) {
         setSaveState('saved');
+        window.dispatchEvent(new Event('content-saved'));
         setTimeout(() => setSaveState('idle'), 2500);
       } else {
         setSaveState('error');
@@ -101,7 +103,10 @@ export function FieldEditor({
         {type === 'textarea' ? (
           <textarea
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value);
+              window.dispatchEvent(new CustomEvent('live-preview-update', { detail: { section, fieldKey, value: e.target.value, type: 'text' } }));
+            }}
             onKeyDown={(e) => { if (e.key === 'Enter' && e.metaKey) handleSave(); }}
             placeholder={placeholder}
             maxLength={maxLength}
@@ -112,7 +117,10 @@ export function FieldEditor({
           <input
             type={type}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => {
+              setValue(e.target.value);
+              window.dispatchEvent(new CustomEvent('live-preview-update', { detail: { section, fieldKey, value: e.target.value, type: 'text' } }));
+            }}
             onKeyDown={(e) => { if (e.key === 'Enter') handleSave(); }}
             placeholder={placeholder}
             maxLength={maxLength}

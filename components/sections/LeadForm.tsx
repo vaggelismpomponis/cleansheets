@@ -11,6 +11,7 @@ import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 
 const formSchema = z.object({
   email: z.string().email("Μη έγκυρο email"),
@@ -24,7 +25,8 @@ interface LeadFormProps {
   siteContent: SiteContent;
 }
 
-export default function LeadForm({ siteContent }: LeadFormProps) {
+export default function LeadForm({ siteContent: initialContent }: LeadFormProps) {
+  const { siteContent } = useLivePreview();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {

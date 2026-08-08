@@ -36,20 +36,26 @@ export function ArrayEditor({
   const [deleteTarget, setDeleteTarget] = useState<number | null>(null);
 
   const handleChange = (index: number, key: string, value: string) => {
-    setItems((prev) => prev.map((item, i) => (i === index ? { ...item, [key]: value } : item)));
+    const newItems = items.map((item, i) => (i === index ? { ...item, [key]: value } : item));
+    setItems(newItems);
+    window.dispatchEvent(new CustomEvent('live-preview-update', { detail: { section, fieldKey, value: JSON.stringify(newItems), type: 'json' } }));
   };
 
   const handleAdd = () => {
     const newItem: ArrayItem = {};
     fields.forEach((f) => { newItem[f.key] = ''; });
-    setItems((prev) => [...prev, newItem]);
-    setExpanded(items.length);
+    const newItems = [...items, newItem];
+    setItems(newItems);
+    setExpanded(newItems.length - 1);
+    window.dispatchEvent(new CustomEvent('live-preview-update', { detail: { section, fieldKey, value: JSON.stringify(newItems), type: 'json' } }));
   };
 
   const handleDelete = (index: number) => {
-    setItems((prev) => prev.filter((_, i) => i !== index));
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
     if (expanded === index) setExpanded(null);
     setDeleteTarget(null);
+    window.dispatchEvent(new CustomEvent('live-preview-update', { detail: { section, fieldKey, value: JSON.stringify(newItems), type: 'json' } }));
   };
 
   const requestDelete = (e: React.MouseEvent, index: number) => {
@@ -63,6 +69,7 @@ export function ArrayEditor({
       const result = await saveContent(section, fieldKey, JSON.stringify(items), 'json');
       if (result.success) {
         setSaveState('saved');
+        window.dispatchEvent(new Event('content-saved'));
         setTimeout(() => setSaveState('idle'), 2500);
       } else {
         setSaveState('error');

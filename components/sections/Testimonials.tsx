@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 
 interface TestimonialsProps {
   siteContent: SiteContent;
 }
 
-export default function Testimonials({ siteContent }: TestimonialsProps) {
-  const content = siteContent.testimonials;
+export default function Testimonials({ siteContent: initialContent }: TestimonialsProps) {
+  const { siteContent } = useLivePreview();
+  const content = (siteContent || initialContent).testimonials;
 
   return (
     <section id="testimonials" className="relative py-20 md:py-28 overflow-hidden bg-slate-50">

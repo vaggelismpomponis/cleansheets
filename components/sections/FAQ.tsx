@@ -9,13 +9,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 
 interface FAQProps {
   siteContent: SiteContent;
   faqItems: FAQItem[];
 }
 
-export default function FAQ({ siteContent, faqItems }: FAQProps) {
+export default function FAQ({ siteContent: initialContent, faqItems: initialFaq }: FAQProps) {
+  const { siteContent, faqItems } = useLivePreview();
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

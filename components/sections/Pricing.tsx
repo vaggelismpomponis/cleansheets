@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, X, ArrowRight } from "lucide-react";
-import { siteContent } from "@/lib/content";
-import { pricingTiers } from "@/lib/constants";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function Pricing() {
   const [isYearly, setIsYearly] = useState(false);
+  const { siteContent, pricingTiers } = useLivePreview();
 
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);

@@ -6,12 +6,14 @@ import Link from "next/link";
 import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import Logo from "@/components/Logo";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 
 interface FooterProps {
   siteContent: SiteContent;
 }
 
-export default function Footer({ siteContent }: FooterProps) {
+export default function Footer({ siteContent: initialContent }: FooterProps) {
+  const { siteContent } = useLivePreview();
   return (
     <footer className="bg-[#27272A] text-slate-400 relative overflow-hidden">
       {/* Top accent line */}

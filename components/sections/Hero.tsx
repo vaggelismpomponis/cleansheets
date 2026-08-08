@@ -8,12 +8,15 @@ import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 
 interface HeroProps {
   siteContent: SiteContent;
 }
 
-export default function Hero({ siteContent }: HeroProps) {
+export default function Hero({ siteContent: initialContent }: HeroProps) {
+  const { siteContent } = useLivePreview();
+
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
     element?.scrollIntoView({ behavior: "smooth" });

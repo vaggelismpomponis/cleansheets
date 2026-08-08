@@ -5,6 +5,7 @@ import { ArrowRight, UserX, ShieldAlert, Clock } from "lucide-react";
 import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLivePreview } from "@/components/LivePreviewProvider";
 
 const iconMap = {
   UserX,
@@ -16,7 +17,9 @@ interface ProblemProps {
   siteContent: SiteContent;
 }
 
-export default function Problem({ siteContent }: ProblemProps) {
+export default function Problem({ siteContent: initialContent }: ProblemProps) {
+  const { siteContent } = useLivePreview();
+
   const handleScroll = (href: string) => {
     const element = document.querySelector(href);
     element?.scrollIntoView({ behavior: "smooth" });
