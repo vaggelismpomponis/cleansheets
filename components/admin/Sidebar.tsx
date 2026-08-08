@@ -19,6 +19,7 @@ import {
   ExternalLink,
   X,
   History,
+  Briefcase,
 } from 'lucide-react';
 import { LogoIcon } from '@/components/Logo';
 
@@ -32,6 +33,7 @@ const navItems = [
   { href: '/admin/faq', label: 'FAQ', icon: HelpCircle },
   { href: '/admin/lead-form', label: 'Φόρμα', icon: Mail },
   { href: '/admin/footer', label: 'Footer', icon: Layers },
+  { href: '/admin/jobs', label: 'Αγγελίες', icon: Briefcase },
   { href: '/admin/users', label: 'Χρήστες', icon: UserPlus },
 ];
 

@@ -14,6 +14,7 @@ export const siteContent = {
     links: [
       { label: "Ποιοι Είμαστε", href: "/about" },
       { label: "Υπηρεσίες", href: "/services" },
+      { label: "Καριέρα", href: "/careers" },
       { label: "Συχνές Ερωτήσεις", href: "#faq" },
       { label: "Επικοινωνία", href: "#contact" },
     ],
@@ -208,6 +209,7 @@ export const siteContent = {
       title: "Επικοινωνία",
       email: "info@ephtopia.eu",
       phone: "+30 698 2438 719",
+      landline: "+30 211 001 1776",
     },
     social: {
       instagram: "https://instagram.com/ephtopiacleans",

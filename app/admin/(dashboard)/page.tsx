@@ -10,6 +10,7 @@ import {
   Layers,
   ExternalLink,
   ArrowRight,
+  Briefcase,
 } from 'lucide-react';
 
 const sections = [
@@ -21,6 +22,7 @@ const sections = [
   { href: '/admin/faq', label: 'FAQ', icon: HelpCircle, description: 'Ερωτήσεις και απαντήσεις (προσθήκη/επεξεργασία/διαγραφή)' },
   { href: '/admin/lead-form', label: 'Φόρμα', icon: Mail, description: 'Ετικέτες φόρμας, placeholders, κείμενο CTA' },
   { href: '/admin/footer', label: 'Footer', icon: Layers, description: 'Στοιχεία επικοινωνίας, σύνδεσμοι, social URLs, περιγραφή' },
+  { href: '/admin/jobs', label: 'Αγγελίες', icon: Briefcase, description: 'Δημιουργία, επεξεργασία και διαχείριση αγγελιών εργασίας' },
 ];
 
 export default async function AdminDashboardPage() {

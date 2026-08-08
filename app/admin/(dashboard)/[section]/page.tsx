@@ -259,7 +259,8 @@ function FooterEditor({ content }: { content: typeof siteContent }) {
       </EditorCard>
       <EditorCard title="Contact Info">
         <FieldEditor section="footer_contact" fieldKey="email" label="Email" defaultValue={d.contact.email} currentValue={ft.contact.email} type="email" />
-        <FieldEditor section="footer_contact" fieldKey="phone" label="Phone" defaultValue={d.contact.phone} currentValue={ft.contact.phone} type="tel" />
+        <FieldEditor section="footer_contact" fieldKey="phone" label="Phone (Mobile)" defaultValue={d.contact.phone} currentValue={ft.contact.phone} type="tel" />
+        <FieldEditor section="footer_contact" fieldKey="landline" label="Landline" defaultValue={d.contact.landline} currentValue={ft.contact.landline} type="tel" />
       </EditorCard>
       <EditorCard title="Social Links">
         <FieldEditor section="footer_social" fieldKey="instagram" label="Instagram URL" defaultValue={d.social.instagram} currentValue={ft.social.instagram} type="url" />

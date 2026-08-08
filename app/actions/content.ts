@@ -112,6 +112,7 @@ export async function saveContent(
 
   revalidatePath('/');
   revalidatePath('/services');
+  revalidatePath('/careers');
   revalidatePath('/admin');
 
   // Write audit log after the response is sent (non-blocking)

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, LayoutDashboard } from "lucide-react";
+import { Mail, Phone, PhoneCall, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import type { SiteContent } from "@/lib/get-content";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
@@ -123,6 +123,17 @@ export default function Footer({ siteContent }: FooterProps) {
                   {siteContent.footer.contact.phone}
                 </a>
               </li>
+              {siteContent.footer.contact.landline && (
+                <li>
+                  <a
+                    href={`tel:${siteContent.footer.contact.landline.replace(/\s/g, "")}`}
+                    className="flex items-center gap-2 text-sm text-white hover:text-teal-light transition-colors"
+                  >
+                    <PhoneCall className="w-3.5 h-3.5 shrink-0" />
+                    {siteContent.footer.contact.landline}
+                  </a>
+                </li>
+              )}
             </ul>
           </motion.div>
         </motion.div>

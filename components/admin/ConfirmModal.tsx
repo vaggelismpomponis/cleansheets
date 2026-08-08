@@ -36,6 +36,12 @@ export function ConfirmModal({
   requiredConfirmText,
   confirmInputLabel,
 }: ConfirmModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const [inputValue, setInputValue] = useState('');
   const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -84,7 +90,7 @@ export function ConfirmModal({
 
   const confirmBtnDisabled = 'bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed opacity-60';
 
-  if (typeof window === 'undefined') return null;
+  if (!mounted || typeof window === 'undefined') return null;
 
   return createPortal(
     <AnimatePresence>
