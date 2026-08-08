@@ -6,46 +6,13 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { requireAdmin } from '@/lib/auth';
 import { z } from 'zod';
 
-// ──────────────────────────────────────────────────────────────
-// Types
-// ──────────────────────────────────────────────────────────────
-
-export interface Job {
-  id: string;
-  title: string;
-  description: string;
-  location: string;
-  employment_type: 'full-time' | 'part-time' | 'contract';
-  department: string;
-  salary_range: string | null;
-  requirements: string[];
-  responsibilities: string[];
-  benefits: string[];
-  contact_email: string;
-  deadline: string | null;  // ISO date string 'YYYY-MM-DD'
-  is_active: boolean;
-  created_at: string;
-  updated_at: string;
-  created_by: string | null;
-}
-
-export interface JobApplication {
-  id: string;
-  job_id: string;
-  full_name: string;
-  email: string;
-  phone: string;
-  cv_url: string | null;
-  cv_view_url?: string | null;
-  cover_letter: string | null;
-  submitted_at: string;
-}
-
-export interface JobWithApplicationCount extends Job {
-  application_count: number;
-}
-
-export type ActionResult = { success: boolean; error?: string; id?: string };
+import type {
+  Job,
+  JobApplication,
+  JobWithApplicationCount,
+  ApplicationStatus,
+  ActionResult,
+} from '@/lib/types/jobs';
 
 // ──────────────────────────────────────────────────────────────
 // Validation schemas
@@ -333,6 +300,37 @@ export async function getApplications(jobId: string): Promise<JobApplication[]> 
   );
 
   return applications;
+}
+
+export async function updateApplicationStatus(
+  applicationId: string,
+  status: ApplicationStatus
+): Promise<ActionResult> {
+  await requireAdmin();
+  const adminClient = createAdminClient();
+
+  const { data: appData, error: fetchErr } = await adminClient
+    .from('job_applications')
+    .select('job_id')
+    .eq('id', applicationId)
+    .single();
+
+  if (fetchErr || !appData) {
+    return { success: false, error: 'Η αίτηση δεν βρέθηκε.' };
+  }
+
+  const { error } = await adminClient
+    .from('job_applications')
+    .update({ status })
+    .eq('id', applicationId);
+
+  if (error) {
+    return { success: false, error: error.message };
+  }
+
+  revalidatePath(`/admin/jobs/${appData.job_id}/applications`);
+  revalidatePath('/admin/jobs');
+  return { success: true };
 }
 
 // ──────────────────────────────────────────────────────────────

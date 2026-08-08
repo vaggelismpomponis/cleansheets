@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS job_applications (
   phone        TEXT        NOT NULL,
   cv_url       TEXT,                  -- Supabase Storage URL
   cover_letter TEXT,                  -- Optional message
-  submitted_at TIMESTAMPTZ DEFAULT now()
+  submitted_at TIMESTAMPTZ DEFAULT now(),
+  status       TEXT        NOT NULL DEFAULT 'new' CHECK (status IN ('new', 'viewed', 'rejected', 'hired'))
 );
 
 -- ──────────────────────────────────────────────────────────────

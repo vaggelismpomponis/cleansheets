@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MapPin, Euro, Briefcase, Building2, CalendarDays, ArrowRight } from 'lucide-react';
-import type { Job } from '@/app/actions/jobs';
+import type { Job } from '@/lib/types/jobs';
 
 const employmentTypeLabel: Record<string, string> = {
   'full-time': 'Πλήρης Απασχόληση',

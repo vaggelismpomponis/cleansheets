@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { toggleJobActive, deleteJob } from '@/app/actions/jobs';
 import { ConfirmModal } from '@/components/admin/ConfirmModal';
-import type { JobWithApplicationCount } from '@/app/actions/jobs';
+import type { JobWithApplicationCount } from '@/lib/types/jobs';
 
 const employmentTypeLabel: Record<string, string> = {
   'full-time': 'Πλήρης',
@@ -95,7 +95,7 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
         {jobs.map((job) => {
           const isExpired = job.deadline ? new Date(job.deadline) < new Date() : false;
           const isToggling = togglingId === job.id;
-          const fb = feedback?.id === job.id ? feedback.type : null;
+          const fb = feedback && feedback.id === job.id ? feedback.type : null;
 
           return (
             <div
@@ -207,7 +207,7 @@ export function JobsTable({ jobs: initialJobs }: JobsTableProps) {
               {jobs.map((job) => {
                 const isExpired = job.deadline ? new Date(job.deadline) < new Date() : false;
                 const isToggling = togglingId === job.id;
-                const fb = feedback?.id === job.id ? feedback.type : null;
+                const fb = feedback && feedback.id === job.id ? feedback.type : null;
 
                 return (
                   <tr

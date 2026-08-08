@@ -6,7 +6,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Plus, Trash2, Loader2, Save } from 'lucide-react';
-import type { Job } from '@/app/actions/jobs';
+import type { Job } from '@/lib/types/jobs';
 
 const formSchema = z.object({
   title: z.string().min(2, 'Ο τίτλος είναι υποχρεωτικός'),

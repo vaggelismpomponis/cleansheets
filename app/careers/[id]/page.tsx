@@ -166,7 +166,7 @@ export default async function JobDetailPage({ params }: PageProps) {
                   Αρμοδιότητες
                 </h2>
                 <ul className="space-y-3">
-                  {job.responsibilities.map((item, i) => (
+                  {(job.responsibilities as string[]).map((item: string, i: number) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-muted">
                       <CheckCircle className="w-4 h-4 text-teal shrink-0 mt-0.5" />
                       {item}
@@ -184,7 +184,7 @@ export default async function JobDetailPage({ params }: PageProps) {
                   Απαιτήσεις
                 </h2>
                 <ul className="space-y-3">
-                  {job.requirements.map((item, i) => (
+                  {(job.requirements as string[]).map((item: string, i: number) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-muted">
                       <div className="w-1.5 h-1.5 rounded-full bg-teal shrink-0 mt-2" />
                       {item}
@@ -202,7 +202,7 @@ export default async function JobDetailPage({ params }: PageProps) {
                   Παροχές
                 </h2>
                 <ul className="space-y-3">
-                  {job.benefits.map((item, i) => (
+                  {(job.benefits as string[]).map((item: string, i: number) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-muted">
                       <Gift className="w-4 h-4 text-gold shrink-0 mt-0.5" />
                       {item}
