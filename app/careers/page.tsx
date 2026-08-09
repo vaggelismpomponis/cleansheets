@@ -87,18 +87,16 @@ export default async function CareersPage() {
             </div>
           ) : (
             <>
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-1">
-                    Αγγελίες Εργασίας
-                  </p>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-navy font-heading">
-                    {jobs.length === 1 ? '1 ανοιχτή θέση' : `${jobs.length} ανοιχτές θέσεις`}
-                  </h2>
-                </div>
+              <div className="text-center mb-10">
+                <p className="text-xs font-semibold text-muted uppercase tracking-widest mb-2">
+                  Αγγελίες Εργασίας
+                </p>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-navy font-heading">
+                  {jobs.length === 1 ? '1 ανοιχτή θέση' : `${jobs.length} ανοιχτές θέσεις`}
+                </h2>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4 lg:gap-5">
+              <div className={`grid gap-4 lg:gap-5 ${jobs.length === 1 ? "max-w-xl mx-auto" : "sm:grid-cols-2"}`}>
                 {jobs.map((job, i) => (
                   <JobCard key={job.id} job={job} index={i} />
                 ))}

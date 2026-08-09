@@ -45,10 +45,11 @@ export function JobCard({ job, index = 0 }: JobCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="w-full h-full"
     >
       <Link
         href={`/careers/${job.id}`}
-        className="group block bg-white border border-border rounded-2xl p-6 shadow-sm hover:shadow-lg hover:border-teal/25 transition-all duration-300 card-hover"
+        className="group flex flex-col bg-white border border-border rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-lg hover:border-teal/25 transition-all duration-300 card-hover w-full h-full"
         aria-label={`Δείτε αγγελία: ${job.title}`}
       >
         {/* Header row */}
@@ -107,7 +108,7 @@ export function JobCard({ job, index = 0 }: JobCardProps) {
         </p>
 
         {/* CTA */}
-        <div className="flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all">
+        <div className="flex items-center gap-1.5 text-sm font-semibold text-teal group-hover:gap-2.5 transition-all mt-auto">
           <Building2 className="w-4 h-4" />
           <span>Δείτε την αγγελία</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
